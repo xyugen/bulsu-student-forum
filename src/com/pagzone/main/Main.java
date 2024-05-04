@@ -65,7 +65,7 @@ public class Main extends javax.swing.JFrame {
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
-                int splashScreenWidth = (int) (600 - 250 * fraction);
+                int splashScreenWidth = (int) (pnlMain.getWidth() - 250 * fraction);
                 int x = (int) (0 + 250 * fraction);
                 pnlSplashScreen.setBounds(x, 0, splashScreenWidth, 400);
                 
@@ -110,10 +110,11 @@ public class Main extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnlMain.setLayout(new java.awt.BorderLayout());
         pnlMain.add(pnlSplashScreen, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
+        getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

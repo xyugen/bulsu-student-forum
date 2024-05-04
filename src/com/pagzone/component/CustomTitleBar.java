@@ -3,6 +3,10 @@ package com.pagzone.component;
 import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingSource;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
  *
@@ -77,10 +81,35 @@ public class CustomTitleBar extends javax.swing.JPanel {
     private void btnMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizeActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            frame.setState(Frame.ICONIFIED); // Minimize the enclosing JFrame
+            animateMinimize(frame); // Minimize the enclosing JFrame
         }
     }//GEN-LAST:event_btnMinimizeActionPerformed
 
+    private void animateMinimize(JFrame frame) {
+        int defaultWidth = frame.getWidth(), defaultHeight = frame.getHeight();
+        Animator animator = new Animator(200, new TimingTargetAdapter() {
+                    @Override
+                    public void timingEvent(float fraction) {
+                        int frameHeight = frame.getHeight();
+                        int minHeight = 25; // Minimum height for the frame
+
+                        // Calculate the new height of the frame based on the animation fraction
+                        int newHeight = (int) (frameHeight - (frameHeight - minHeight) * fraction);
+
+                        // Set the frame's size
+                        frame.setSize(frame.getWidth(), newHeight);
+                    }
+
+                    @Override
+                    public void end() {
+                        frame.setState(Frame.ICONIFIED);
+                        frame.setSize(defaultWidth, defaultHeight);
+                    }
+                });
+
+        animator.start();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnMinimize;

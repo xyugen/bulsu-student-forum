@@ -57,7 +57,7 @@ public class Login extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("BulSU Student Forum");
+        lblTitle.setText("<html><p><span style=\"color:#C72424;\">BulSU</span> Student Forum</p></html>");
 
         lblWelcomeBack.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
         lblWelcomeBack.setForeground(new java.awt.Color(0, 0, 0));
@@ -128,7 +128,7 @@ public class Login extends javax.swing.JPanel {
                                     .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ptxtPassword)
                                     .addComponent(lblWelcomeBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblTitle))
                                 .addGap(0, 22, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -144,7 +144,7 @@ public class Login extends javax.swing.JPanel {
                 .addGap(4, 4, 4)
                 .addComponent(lblChatIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTitle)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblWelcomeBack)
                 .addGap(35, 35, 35)

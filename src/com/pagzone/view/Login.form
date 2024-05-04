@@ -102,7 +102,7 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="BulSU Student Forum"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;p&gt;&lt;span style=&quot;color:#C72424;&quot;&gt;BulSU&lt;/span&gt; Student Forum&lt;/p&gt;&lt;/html&gt;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblWelcomeBack">

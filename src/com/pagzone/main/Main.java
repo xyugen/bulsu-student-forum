@@ -104,7 +104,6 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         
         Timer delayTimer = new Timer(1500, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("STARTED!");
                 animator.start();
             }
         });
@@ -127,7 +126,6 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         pnlMain.setLayout(new java.awt.BorderLayout());
         pnlMain.add(pnlSplashScreen, java.awt.BorderLayout.CENTER);
 

@@ -14,14 +14,14 @@ import javax.swing.JLabel;
  *
  * @author Arias
  */
-public class Login extends javax.swing.JPanel {
-    private CardLayoutChangeListener listener;
-    
-    public Login() {
+public class Signup extends javax.swing.JPanel {
+    CardLayoutChangeListener listener;
+            
+    public Signup() {
         initComponents();
     }
     
-    public Login(CardLayoutChangeListener listener) {
+    public Signup(CardLayoutChangeListener listener) {
         this.listener = listener;
         initComponents();
     }
@@ -45,6 +45,7 @@ public class Login extends javax.swing.JPanel {
         lblNoAccount = new javax.swing.JLabel();
         lblSignUpLink = new javax.swing.JLabel();
         customTitleBar1 = new com.pagzone.component.CustomTitleBar();
+        ptxtPassword1 = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -62,12 +63,12 @@ public class Login extends javax.swing.JPanel {
         lblWelcomeBack.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
         lblWelcomeBack.setForeground(new java.awt.Color(0, 0, 0));
         lblWelcomeBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblWelcomeBack.setText("Welcome Back");
+        lblWelcomeBack.setText("Create new account");
 
         txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(0, 0, 0));
-        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "E-mail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -82,7 +83,7 @@ public class Login extends javax.swing.JPanel {
         btnLogin.setBackground(new java.awt.Color(199, 36, 36));
         btnLogin.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setText("Login");
+        btnLogin.setText("Sign Up");
         btnLogin.setBorder(null);
 
         pnlSignUpLabels.setBackground(new java.awt.Color(255, 255, 255));
@@ -91,24 +92,29 @@ public class Login extends javax.swing.JPanel {
 
         lblNoAccount.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblNoAccount.setForeground(new java.awt.Color(0, 0, 0));
-        lblNoAccount.setText("Don't have an account?");
+        lblNoAccount.setText("Already have an account?");
         pnlSignUpLabels.add(lblNoAccount);
 
         lblSignUpLink.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblSignUpLink.setForeground(new java.awt.Color(255, 102, 102));
-        lblSignUpLink.setText("Sign Up");
+        lblSignUpLink.setText("Sign in");
         lblSignUpLink.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSignUpLinkMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblSignUpLinkMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblSignUpLinkMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSignUpLinkMousePressed(evt);
+            }
         });
         pnlSignUpLabels.add(lblSignUpLink);
+
+        ptxtPassword1.setBackground(new java.awt.Color(255, 255, 255));
+        ptxtPassword1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        ptxtPassword1.setForeground(new java.awt.Color(0, 0, 0));
+        ptxtPassword1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Confirm Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,13 +129,14 @@ public class Login extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 22, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(txtUsername)
                                     .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ptxtPassword)
                                     .addComponent(lblWelcomeBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 22, Short.MAX_VALUE)))
+                                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ptxtPassword1))
+                                .addGap(0, 21, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -147,15 +154,17 @@ public class Login extends javax.swing.JPanel {
                 .addComponent(lblTitle)
                 .addGap(18, 18, 18)
                 .addComponent(lblWelcomeBack)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ptxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ptxtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,9 +180,9 @@ public class Login extends javax.swing.JPanel {
         setLabelUnderline((JLabel) evt.getSource(), false);
     }//GEN-LAST:event_lblSignUpLinkMouseExited
 
-    private void lblSignUpLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMouseClicked
-        listener.changeCardLayout("signup");
-    }//GEN-LAST:event_lblSignUpLinkMouseClicked
+    private void lblSignUpLinkMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMousePressed
+        listener.changeCardLayout("login");
+    }//GEN-LAST:event_lblSignUpLinkMousePressed
 
     private void setLabelUnderline(JLabel label, boolean value) {
         Font font = label.getFont();
@@ -196,6 +205,7 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JLabel lblWelcomeBack;
     private javax.swing.JPanel pnlSignUpLabels;
     private javax.swing.JPasswordField ptxtPassword;
+    private javax.swing.JPasswordField ptxtPassword1;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,20 +2,25 @@ package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.view.Login;
+import com.pagzone.view.Signup;
+import com.pagzone.view.SplashScreen;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLayoutChangeListener {
     private Point initialClick;
+    private JPanel pnlCardContainer;
 
     public Main() {
         initComponents();
@@ -55,12 +60,23 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
+    @Override
+    public void changeCardLayout(String cardName) {
+        CardLayout cardLayout = (CardLayout) pnlCardContainer.getLayout();
+        cardLayout.show(pnlCardContainer, cardName);
+    }
+    
     private void initSplashScreen() {
-        Login pnlLogin = new Login();
-        pnlLogin.setSize(0, 400);
-        pnlLogin.setVisible(false);
-        pnlMain.add(pnlLogin, BorderLayout.WEST);
-        pnlMain.setComponentZOrder(pnlLogin, 0);
+        Login pnlLogin = new Login(this);
+        Signup pnlSignup = new Signup(this);
+        
+        pnlCardContainer = new JPanel(new CardLayout());
+        pnlCardContainer.setVisible(false);
+        pnlMain.add(pnlCardContainer, BorderLayout.WEST);
+
+        pnlCardContainer.add(pnlLogin, "login");
+        pnlCardContainer.add(pnlSignup, "signup");
+        CardLayout cardLayout = (CardLayout) pnlCardContainer.getLayout();
         
         TimingTarget target = new TimingTargetAdapter() {
             @Override
@@ -69,9 +85,10 @@ public class Main extends javax.swing.JFrame {
                 int x = (int) (0 + 250 * fraction);
                 pnlSplashScreen.setBounds(x, 0, splashScreenWidth, 400);
                 
-                pnlLogin.setVisible(true);
+                pnlCardContainer.setVisible(true);
+                cardLayout.show(pnlCardContainer, "login");
                 int loginWidth = (int) (0 + 300 * fraction);
-                pnlLogin.setSize(loginWidth, 400);
+                pnlCardContainer.setSize(loginWidth, 400);
             }
             
             @Override

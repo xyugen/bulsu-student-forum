@@ -1,16 +1,25 @@
 package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.pagzone.view.Login;
+import java.awt.BorderLayout;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.Timer;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class Main extends javax.swing.JFrame {
     private Point initialClick;
 
     public Main() {
         initComponents();
+        initSplashScreen();
         
         JFrame parentFrame = this;
         this.addMouseListener(new MouseAdapter() {
@@ -46,13 +55,52 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
+    private void initSplashScreen() {
+        Login pnlLogin = new Login();
+        pnlLogin.setSize(0, 400);
+        pnlLogin.setVisible(false);
+        pnlMain.add(pnlLogin, BorderLayout.WEST);
+        pnlMain.setComponentZOrder(pnlLogin, 0);
+        
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                int splashScreenWidth = (int) (600 - 250 * fraction);
+                int x = (int) (0 + 250 * fraction);
+                pnlSplashScreen.setBounds(x, 0, splashScreenWidth, 400);
+                
+                pnlLogin.setVisible(true);
+                int loginWidth = (int) (0 + 300 * fraction);
+                pnlLogin.setSize(loginWidth, 400);
+            }
+            
+            @Override
+            public void end() {
+                pnlMain.revalidate();
+                pnlMain.repaint();
+            }
+        };
+        Animator animator = new Animator(1000, target);
+        animator.setAcceleration(0.5f);
+        animator.setDeceleration(0.5f);
+        animator.setResolution(0);
+        
+        Timer delayTimer = new Timer(1500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("STARTED!");
+                animator.start();
+            }
+        });
+        delayTimer.setRepeats(false);
+        delayTimer.start();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        login1 = new com.pagzone.view.Login();
-        jPanel1 = new javax.swing.JPanel();
-        splashScreen1 = new com.pagzone.view.SplashScreen();
+        pnlMain = new javax.swing.JPanel();
+        pnlSplashScreen = new com.pagzone.view.SplashScreen();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BulSU Student Forum");
@@ -60,23 +108,12 @@ public class Main extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
-        getContentPane().add(login1);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        pnlMain.setLayout(new java.awt.BorderLayout());
+        pnlMain.add(pnlSplashScreen, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splashScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splashScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1);
+        getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,8 +136,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private com.pagzone.view.Login login1;
-    private com.pagzone.view.SplashScreen splashScreen1;
+    private javax.swing.JPanel pnlMain;
+    private com.pagzone.view.SplashScreen pnlSplashScreen;
     // End of variables declaration//GEN-END:variables
 }

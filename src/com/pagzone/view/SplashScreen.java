@@ -26,30 +26,29 @@ public class SplashScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblChatQuoteIcon = new javax.swing.JLabel();
-        lblTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(199, 36, 36));
         setForeground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.GridLayout(2, 1));
 
-        lblChatQuoteIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblChatQuoteIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/chat_quote_icon_white_32.png"))); // NOI18N
-        lblChatQuoteIcon.setToolTipText("");
-        lblChatQuoteIcon.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        add(lblChatQuoteIcon);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/chat_quote_icon_white_44.png"))); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        add(jLabel1);
 
-        lblTitle.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("BulSU Student Forum");
-        lblTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        add(lblTitle);
+        jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("BulSU Student Forum");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel2);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblChatQuoteIcon;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

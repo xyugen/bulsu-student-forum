@@ -52,6 +52,7 @@ public class Main extends javax.swing.JFrame {
 
         login1 = new com.pagzone.view.Login();
         jPanel1 = new javax.swing.JPanel();
+        splashScreen1 = new com.pagzone.view.SplashScreen();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BulSU Student Forum");
@@ -68,11 +69,11 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addComponent(splashScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
+            .addComponent(splashScreen1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1);
@@ -100,5 +101,6 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private com.pagzone.view.Login login1;
+    private com.pagzone.view.SplashScreen splashScreen1;
     // End of variables declaration//GEN-END:variables
 }

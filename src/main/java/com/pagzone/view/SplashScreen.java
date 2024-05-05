@@ -14,6 +14,7 @@ public class SplashScreen extends javax.swing.JPanel {
      * Creates new form SplashScreen
      */
     public SplashScreen() {
+        System.out.println(SplashScreen.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         initComponents();
     }
 
@@ -34,7 +35,7 @@ public class SplashScreen extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(2, 1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/chat_quote_icon_white_44.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\chat_quote_icon_white_44.png"));
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         add(jLabel1);
 

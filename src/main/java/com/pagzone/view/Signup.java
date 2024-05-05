@@ -53,7 +53,7 @@ public class Signup extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(301, 411));
 
         lblChatIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblChatIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/chat_quote_icon.png"))); // NOI18N
+        lblChatIcon.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\chat_quote_icon.png"));
 
         lblTitle.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 0, 0));
@@ -164,7 +164,7 @@ public class Signup extends javax.swing.JPanel {
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

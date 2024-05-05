@@ -28,7 +28,7 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         initSplashScreen();
         
         EmailService e = new EmailService();
-        e.sendOTPMail("alex.arias.jorym@gmail.com", "123123");
+        //e.sendOTPMail("alex.arias.jorym@gmail.com", "123123");
         
         JFrame parentFrame = this;
         this.addMouseListener(new MouseAdapter() {

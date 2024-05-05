@@ -3,7 +3,6 @@ package com.pagzone.main;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.view.Login;
 import com.pagzone.view.Signup;
-import com.pagzone.view.SplashScreen;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Point;
@@ -82,7 +81,7 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
             @Override
             public void timingEvent(float fraction) {
                 int splashScreenWidth = (int) (pnlMain.getWidth() - 250 * fraction);
-                int x = (int) (0 + 250 * fraction);
+                int x = (int) (0 + 300 * fraction);
                 pnlSplashScreen.setBounds(x, 0, splashScreenWidth, 400);
                 
                 pnlCardContainer.setVisible(true);

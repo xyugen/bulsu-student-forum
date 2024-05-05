@@ -8,6 +8,7 @@ import com.pagzone.model.CardLayoutChangeListener;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.util.Map;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
 /**
@@ -39,6 +40,7 @@ public class Login extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         lblWelcomeBack = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
+        chkShowPassword = new javax.swing.JCheckBox();
         ptxtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         pnlSignUpLabels = new javax.swing.JPanel();
@@ -71,6 +73,16 @@ public class Login extends javax.swing.JPanel {
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
+            }
+        });
+
+        chkShowPassword.setBackground(new java.awt.Color(255, 255, 255));
+        chkShowPassword.setFont(new java.awt.Font("Poppins", 0, 10)); // NOI18N
+        chkShowPassword.setForeground(new java.awt.Color(102, 102, 102));
+        chkShowPassword.setText("Show password");
+        chkShowPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkShowPasswordActionPerformed(evt);
             }
         });
 
@@ -122,13 +134,15 @@ public class Login extends javax.swing.JPanel {
                             .addComponent(customTitleBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 22, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ptxtPassword)
-                                    .addComponent(lblWelcomeBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitle))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkShowPassword)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ptxtPassword)
+                                        .addComponent(lblWelcomeBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblTitle)))
                                 .addGap(0, 22, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -151,7 +165,9 @@ public class Login extends javax.swing.JPanel {
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ptxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkShowPassword)
+                .addGap(9, 9, 9)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlSignUpLabels, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,6 +191,15 @@ public class Login extends javax.swing.JPanel {
         listener.changeCardLayout("signup");
     }//GEN-LAST:event_lblSignUpLinkMouseClicked
 
+    private void chkShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowPasswordActionPerformed
+        JCheckBox curCheckBox = (JCheckBox) evt.getSource();
+        if (curCheckBox.isSelected()) {
+            ptxtPassword.setEchoChar((char) 0);
+        } else {
+            ptxtPassword.setEchoChar('\u2022');
+        }
+    }//GEN-LAST:event_chkShowPasswordActionPerformed
+
     private void setLabelUnderline(JLabel label, boolean value) {
         Font font = label.getFont();
         Map attributes = font.getAttributes();
@@ -188,6 +213,7 @@ public class Login extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JCheckBox chkShowPassword;
     private com.pagzone.component.CustomTitleBar customTitleBar1;
     private javax.swing.JLabel lblChatIcon;
     private javax.swing.JLabel lblNoAccount;

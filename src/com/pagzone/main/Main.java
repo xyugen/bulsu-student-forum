@@ -5,6 +5,7 @@ import com.pagzone.view.Login;
 import com.pagzone.view.Signup;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -125,6 +127,7 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 36, 36)));
         pnlMain.setLayout(new java.awt.BorderLayout());
         pnlMain.add(pnlSplashScreen, java.awt.BorderLayout.CENTER);
 

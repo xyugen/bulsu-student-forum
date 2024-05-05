@@ -40,12 +40,12 @@
                               <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txtUsername" max="32767" attributes="0"/>
-                                  <Component id="btnLogin" alignment="0" max="32767" attributes="0"/>
                                   <Component id="pnlSignUpLabels" max="32767" attributes="0"/>
                                   <Component id="ptxtPassword" max="32767" attributes="0"/>
-                                  <Component id="lblWelcomeBack" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="lblTitle" max="32767" attributes="0"/>
                                   <Component id="ptxtPassword1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblTitle" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnLogin" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblWelcomeBack" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                           </Group>
@@ -82,7 +82,7 @@
               <Component id="btnLogin" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="pnlSignUpLabels" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

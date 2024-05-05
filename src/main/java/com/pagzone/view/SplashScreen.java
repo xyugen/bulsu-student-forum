@@ -14,7 +14,6 @@ public class SplashScreen extends javax.swing.JPanel {
      * Creates new form SplashScreen
      */
     public SplashScreen() {
-        System.out.println(SplashScreen.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         initComponents();
     }
 

@@ -58,7 +58,7 @@ public class CustomTitleBar extends javax.swing.JPanel {
         btnMinimize.setBackground(new java.awt.Color(255, 255, 255));
         btnMinimize.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         btnMinimize.setForeground(new java.awt.Color(255, 51, 51));
-        btnMinimize.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\resources/minimize_icon.png"));
+        btnMinimize.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\minimize_icon.png"));
         btnMinimize.setBorder(null);
         btnMinimize.setBorderPainted(false);
         btnMinimize.setContentAreaFilled(false);

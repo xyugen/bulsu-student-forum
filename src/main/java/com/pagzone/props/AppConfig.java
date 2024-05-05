@@ -21,7 +21,7 @@ public class AppConfig {
         properties = new Properties();
         try {
             // Get the directory path of the AppConfig class file
-            String currentDir = AppConfig.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            String currentDir = System.getProperty("user.dir") + "\\src\\main\\java\\";
             File configFile = new File(currentDir, CONFIG_FILE_NAME);
 
             // Load properties from the config file

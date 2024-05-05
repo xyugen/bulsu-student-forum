@@ -1,6 +1,7 @@
 package com.pagzone.service;
 
 import com.pagzone.props.AppConfig;
+import com.sanctionco.jmail.JMail;
 import org.simplejavamail.api.email.Email;
 import org.simplejavamail.api.mailer.Mailer;
 import org.simplejavamail.email.EmailBuilder;
@@ -28,29 +29,36 @@ public class EmailService {
     }
     
     public void sendOTPMail(String toEmail, String authCode) {
-        String emailTemplate = """
-            <p>Hello,</p>
-
-            <p>Thank you for registering with BulSU Student Forum. To complete your registration, please verify your email address by entering the following authentication code:</p>
-
-            <div style="padding: 6px; background-color: #f0f0f0; border-radius: 5px; display: inline-block;">
-                <code style="font-size: 18px; color: #333;"><strong>123123</strong></code>
-            </div>
-
-            <p>If you did not register for an account on BulSU Student Forum, you can ignore this email.</p>
-
-            <p>Thank you,
-            <p>BulSU Student Forum Team</p>
-            """;
+        boolean isEmailValid = JMail.strictValidator()
+                .isValid(toEmail);
         
-        String formattedEmail = String.format(emailTemplate, authCode);
-        Email email = EmailBuilder.startingBlank()
-                .from("BulSU Student Forum", emailUsername)
-                .to(toEmail)
-                .withSubject("Verify Your Email Address")
-                .withHTMLText(formattedEmail)
-                .buildEmail();
-        
-        mailer.sendMail(email);
+        if (isEmailValid) {
+            String emailTemplate = """
+                <p>Hello,</p>
+
+                <p>Thank you for registering with BulSU Student Forum. To complete your registration, please verify your email address by entering the following authentication code:</p>
+
+                <div style="padding: 6px; background-color: #f0f0f0; border-radius: 5px; display: inline-block;">
+                    <code style="font-size: 18px; color: #333;"><strong>123123</strong></code>
+                </div>
+
+                <p>If you did not register for an account on BulSU Student Forum, you can ignore this email.</p>
+
+                <p>Thank you,
+                <p>BulSU Student Forum Team</p>
+                """;
+
+            String formattedEmail = String.format(emailTemplate, authCode);
+            Email email = EmailBuilder.startingBlank()
+                    .from("BulSU Student Forum", emailUsername)
+                    .to(toEmail)
+                    .withSubject("Verify Your Email Address")
+                    .withHTMLText(formattedEmail)
+                    .buildEmail();
+
+            mailer.sendMail(email);
+        } else {
+            
+        }
     }
 }

@@ -87,6 +87,7 @@ public class CustomTitleBar extends javax.swing.JPanel {
 
     private void animateMinimize(JFrame frame) {
         int defaultWidth = frame.getWidth(), defaultHeight = frame.getHeight();
+        btnMinimize.setEnabled(false);
         Animator animator = new Animator(200, new TimingTargetAdapter() {
                     @Override
                     public void timingEvent(float fraction) {
@@ -104,6 +105,7 @@ public class CustomTitleBar extends javax.swing.JPanel {
                     public void end() {
                         frame.setState(Frame.ICONIFIED);
                         frame.setSize(defaultWidth, defaultHeight);
+                        btnMinimize.setEnabled(true);
                     }
                 });
 

@@ -3,6 +3,7 @@ package com.pagzone.main;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.props.AppConfig;
 import com.pagzone.service.EmailService;
+import com.pagzone.util.OTPHelper;
 import com.pagzone.view.Login;
 import com.pagzone.view.Signup;
 import java.awt.BorderLayout;
@@ -26,6 +27,8 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
     public Main() {
         initComponents();
         initSplashScreen();
+        
+        OTPHelper.insertOTP("alex.arias.jorym@gmail.com", "123123");
         
         JFrame parentFrame = this;
         this.addMouseListener(new MouseAdapter() {

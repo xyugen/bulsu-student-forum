@@ -5,11 +5,14 @@
 package com.pagzone.view;
 
 import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.util.UserValidator;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -96,6 +99,11 @@ public class Login extends javax.swing.JPanel {
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
         btnLogin.setBorder(null);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         pnlSignUpLabels.setBackground(new java.awt.Color(255, 255, 255));
         pnlSignUpLabels.setForeground(new java.awt.Color(0, 0, 0));
@@ -200,6 +208,31 @@ public class Login extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_chkShowPasswordActionPerformed
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String username = txtUsername.getText().trim();
+        String password = new String(ptxtPassword.getPassword()).trim();
+        if (UserValidator.verifyLogin(username, password)) {
+            setTextFieldBorder(txtUsername, "Username", new Color(153,153,153));
+            setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+        } else {
+            if (UserValidator.isValidUsername(username)) {
+                setTextFieldBorder(txtUsername, "Username", new Color(153,153,153));
+            } else {
+                setTextFieldBorder(txtUsername, "Username", new Color(199,36,36));
+            }
+            
+            if (UserValidator.isValidPassword(password)) {
+                setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+            } else {
+                setTextFieldBorder(ptxtPassword, "Password", new Color(199,36,36));
+            }
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void setTextFieldBorder(JTextField comp, String title, Color color) {
+        comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
+    }
+    
     private void setLabelUnderline(JLabel label, boolean value) {
         Font font = label.getFont();
         Map attributes = font.getAttributes();

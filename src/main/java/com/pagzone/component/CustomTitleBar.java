@@ -4,8 +4,6 @@ import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import org.jdesktop.animation.timing.Animator;
-import org.jdesktop.animation.timing.TimingSource;
-import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
@@ -74,14 +72,14 @@ public class CustomTitleBar extends javax.swing.JPanel {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            frame.dispose(); // Close the enclosing JFrame
+            frame.dispose();
         }
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizeActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            animateMinimize(frame); // Minimize the enclosing JFrame
+            animateMinimize(frame);
         }
     }//GEN-LAST:event_btnMinimizeActionPerformed
 

@@ -9,11 +9,14 @@ import com.pagzone.util.UserValidator;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.font.TextAttribute;
 import java.util.Arrays;
 import java.util.Map;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -146,8 +149,8 @@ public class Signup extends javax.swing.JPanel {
                                     .addComponent(ptxtPassword)
                                     .addComponent(ptxtConfirmPassword)
                                     .addComponent(lblTitle)
-                                    .addComponent(btnSignup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblWelcomeBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblWelcomeBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSignup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 21, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -197,6 +200,15 @@ public class Signup extends javax.swing.JPanel {
     }//GEN-LAST:event_lblSignUpLinkMousePressed
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
+        if (validateFields()) {
+            
+        };
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true);
+        otpDialog.setVisible(true);
+    }//GEN-LAST:event_btnSignupActionPerformed
+
+    private boolean validateFields() {
         String email = txtEmail.getText().trim();
         String password = new String(ptxtPassword.getPassword()).trim();
         String confirmPassword = new String(ptxtConfirmPassword.getPassword()).trim();
@@ -204,6 +216,8 @@ public class Signup extends javax.swing.JPanel {
             setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
             setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
             setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
+            
+            return true;
         } else {
             if (UserValidator.isValidEmail(email)) {
                 setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
@@ -222,9 +236,11 @@ public class Signup extends javax.swing.JPanel {
             } else {
                 setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(199,36,36));
             }
+            
+            return false;
         }
-    }//GEN-LAST:event_btnSignupActionPerformed
-
+    }
+    
     private void setTextFieldBorder(JTextField comp, String title, Color color) {
         comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
     }

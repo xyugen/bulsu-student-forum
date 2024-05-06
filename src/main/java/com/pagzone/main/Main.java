@@ -1,6 +1,7 @@
 package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.pagzone.service.EmailService;
 import com.pagzone.util.OTPHelper;
 import com.pagzone.view.Login;
 import com.pagzone.view.Signup;

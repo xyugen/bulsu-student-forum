@@ -6,10 +6,8 @@ package com.pagzone.view;
 
 import com.pagzone.model.CardLayoutChangeListener;
 import com.pagzone.util.UserValidator;
+import com.pagzone.util.Helper;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.font.TextAttribute;
-import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -188,11 +186,11 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void lblSignUpLinkMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMouseEntered
-        setLabelUnderline((JLabel) evt.getSource(), true);
+        Helper.setLabelUnderline((JLabel) evt.getSource(), true);
     }//GEN-LAST:event_lblSignUpLinkMouseEntered
 
     private void lblSignUpLinkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMouseExited
-        setLabelUnderline((JLabel) evt.getSource(), false);
+        Helper.setLabelUnderline((JLabel) evt.getSource(), false);
     }//GEN-LAST:event_lblSignUpLinkMouseExited
 
     private void lblSignUpLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMouseClicked
@@ -231,17 +229,6 @@ public class Login extends javax.swing.JPanel {
 
     private void setTextFieldBorder(JTextField comp, String title, Color color) {
         comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
-    }
-    
-    private void setLabelUnderline(JLabel label, boolean value) {
-        Font font = label.getFont();
-        Map attributes = font.getAttributes();
-        if (value) {
-            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        } else {
-            attributes.put(TextAttribute.UNDERLINE, -1);
-        }
-        label.setFont(font.deriveFont(attributes));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

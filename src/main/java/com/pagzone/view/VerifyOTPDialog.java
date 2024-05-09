@@ -4,6 +4,8 @@
  */
 package com.pagzone.view;
 
+import com.pagzone.util.Helper;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -31,7 +33,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlOTPDialog = new javax.swing.JPanel();
         txtOTP1 = new javax.swing.JTextField();
         txtOTP2 = new javax.swing.JTextField();
         txtOTP3 = new javax.swing.JTextField();
@@ -39,13 +41,21 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP5 = new javax.swing.JTextField();
         txtOTP6 = new javax.swing.JTextField();
         btnVerify = new javax.swing.JButton();
+        pnlHeader = new javax.swing.JPanel();
+        lblMailIcon = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        lblCodeSent = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        btnResend = new javax.swing.JToggleButton();
+        lblCancel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setModal(true);
+        setName("OTPDialog"); // NOI18N
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+        pnlOTPDialog.setBackground(new java.awt.Color(255, 255, 255));
 
         txtOTP1.setColumns(1);
         txtOTP1.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
@@ -148,16 +158,95 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addComponent(btnVerify, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                .addContainerGap(84, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnlHeader.setBackground(new java.awt.Color(199, 36, 36));
+
+        lblMailIcon.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\mail_icon_white_64.png"));
+
+        lblTitle.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitle.setText("OTP Verification");
+
+        lblCodeSent.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        lblCodeSent.setForeground(new java.awt.Color(255, 255, 255));
+        lblCodeSent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCodeSent.setText("Code has been sent to");
+        lblCodeSent.setToolTipText("");
+
+        lblEmail.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(239, 221, 101));
+        lblEmail.setText("*****@bulsu.edu.ph");
+
+        btnResend.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        btnResend.setText("RESEND");
+        btnResend.setBorder(null);
+
+        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
+        pnlHeader.setLayout(pnlHeaderLayout);
+        pnlHeaderLayout.setHorizontalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblMailIcon)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCodeSent)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEmail)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnResend, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlHeaderLayout.setVerticalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblMailIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCodeSent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnResend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+        );
+
+        lblCancel.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblCancel.setForeground(new java.awt.Color(255, 102, 102));
+        lblCancel.setText("Cancel");
+        lblCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCancelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCancelMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlOTPDialogLayout = new javax.swing.GroupLayout(pnlOTPDialog);
+        pnlOTPDialog.setLayout(pnlOTPDialogLayout);
+        pnlOTPDialogLayout.setHorizontalGroup(
+            pnlOTPDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOTPDialogLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVerify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlOTPDialogLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addComponent(txtOTP1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtOTP2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,13 +258,18 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
                 .addComponent(txtOTP5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtOTP6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOTPDialogLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        pnlOTPDialogLayout.setVerticalGroup(
+            pnlOTPDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOTPDialogLayout.createSequentialGroup()
+                .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addGroup(pnlOTPDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtOTP1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtOTP2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtOTP3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,18 +278,20 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
                     .addComponent(txtOTP6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnVerify, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlOTPDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlOTPDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -216,10 +312,29 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         if (textField.getText().length() > 1) {
             textField.setText(String.valueOf(textField.getText().charAt(1)));
         }
+        
+        if (!isDigit(textField.getText())) {
+            textField.setText("0");
+        }
         textField.transferFocus();
     }//GEN-LAST:event_txtOTPKeyReleased
 
-    
+    private void lblCancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseEntered
+        Helper.setLabelUnderline((JLabel) evt.getSource(), true);
+    }//GEN-LAST:event_lblCancelMouseEntered
+
+    private void lblCancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseExited
+        Helper.setLabelUnderline((JLabel) evt.getSource(), true);
+    }//GEN-LAST:event_lblCancelMouseExited
+
+    private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lblCancelMouseClicked
+
+    private boolean isDigit(String text) {
+        String regex = "\\d+";
+        return text.matches(regex);
+    }
     
     /**
      * @param args the command line arguments
@@ -264,8 +379,15 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnResend;
     private javax.swing.JButton btnVerify;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCancel;
+    private javax.swing.JLabel lblCodeSent;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblMailIcon;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel pnlHeader;
+    private javax.swing.JPanel pnlOTPDialog;
     private javax.swing.JTextField txtOTP1;
     private javax.swing.JTextField txtOTP2;
     private javax.swing.JTextField txtOTP3;

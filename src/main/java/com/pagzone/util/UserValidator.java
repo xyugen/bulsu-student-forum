@@ -48,7 +48,7 @@ public class UserValidator {
     }
     
     public static boolean isValidBulsuEmail(String email) {
-        return !isValidEmail(email) && email.endsWith("@bulsu.edu.ph");
+        return isValidEmail(email) && email.endsWith("@bulsu.edu.ph");
     }
 
     // Method to validate password format using regular expression

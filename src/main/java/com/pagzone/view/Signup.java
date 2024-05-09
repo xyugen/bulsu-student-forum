@@ -4,13 +4,18 @@
  */
 package com.pagzone.view;
 
+import com.pagzone.dao.OTPDao;
 import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.service.EmailService;
 import com.pagzone.util.Helper;
+import com.pagzone.util.OTPHelper;
 import com.pagzone.util.UserValidator;
 import java.awt.Color;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 /**
@@ -195,8 +200,15 @@ public class Signup extends javax.swing.JPanel {
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
         if (validateFields()) {
             JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            EmailService emailService = new EmailService();
             VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true);
+            String generatedOTP = OTPHelper.generateOTP();
+            String email = txtEmail.getText().trim();
+            
             otpDialog.setVisible(true);
+            
+            OTPDao.insertOTP(email, generatedOTP);
+            emailService.sendOTPMail(email, generatedOTP);
         }
     }//GEN-LAST:event_btnSignupActionPerformed
 
@@ -227,6 +239,19 @@ public class Signup extends javax.swing.JPanel {
                 setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
             } else {
                 setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(199,36,36));
+            }
+            
+            if (!UserValidator.isValidBulsuEmail(email)) {
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                JDialog errorDialog = new JDialog(parentFrame, "Invalid Email", true);
+                JLabel errorLabel = new JLabel("<html><p>You must use your BulSU email account (@bulsu.edu.ph).</p></html>");
+                errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                errorDialog.add(errorLabel);
+                errorDialog.setSize(350, 90);
+                errorDialog.setResizable(false);
+                errorDialog.setBackground(Color.WHITE);
+                
+                errorDialog.setVisible(true);
             }
             
             return false;

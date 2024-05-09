@@ -104,10 +104,8 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         animator.setDeceleration(0.5f);
         animator.setResolution(0);
         
-        Timer delayTimer = new Timer(1500, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                animator.start();
-            }
+        Timer delayTimer = new Timer(1500, (ActionEvent e) -> {
+            animator.start();
         });
         delayTimer.setRepeats(false);
         delayTimer.start();

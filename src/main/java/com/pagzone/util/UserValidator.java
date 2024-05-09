@@ -1,6 +1,8 @@
 package com.pagzone.util;
 
+import com.sanctionco.jmail.EmailValidator;
 import com.sanctionco.jmail.JMail;
+import jakarta.mail.internet.InternetAddress;
 import java.util.regex.Pattern;
 
 public class UserValidator {
@@ -43,6 +45,10 @@ public class UserValidator {
     // Method to validate email format using regular expression
     public static boolean isValidEmail(String email) {
         return JMail.strictValidator().isValid(email);
+    }
+    
+    public static boolean isValidBulsuEmail(String email) {
+        return !isValidEmail(email) && email.endsWith("@bulsu.edu.ph");
     }
 
     // Method to validate password format using regular expression

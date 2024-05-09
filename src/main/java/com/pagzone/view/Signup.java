@@ -5,24 +5,17 @@
 package com.pagzone.view;
 
 import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.util.Helper;
 import com.pagzone.util.UserValidator;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.font.TextAttribute;
-import java.util.Arrays;
-import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 /**
  *
- * @author Arias
+ * @author Chupaguio
  */
 public class Signup extends javax.swing.JPanel {
     CardLayoutChangeListener listener;
@@ -188,11 +181,11 @@ public class Signup extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void lblSignUpLinkMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMouseEntered
-        setLabelUnderline((JLabel) evt.getSource(), true);
+        Helper.setLabelUnderline((JLabel) evt.getSource(), true);
     }//GEN-LAST:event_lblSignUpLinkMouseEntered
 
     private void lblSignUpLinkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMouseExited
-        setLabelUnderline((JLabel) evt.getSource(), false);
+        Helper.setLabelUnderline((JLabel) evt.getSource(), false);
     }//GEN-LAST:event_lblSignUpLinkMouseExited
 
     private void lblSignUpLinkMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpLinkMousePressed
@@ -201,11 +194,10 @@ public class Signup extends javax.swing.JPanel {
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
         if (validateFields()) {
-            
-        };
-        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true);
-        otpDialog.setVisible(true);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true);
+            otpDialog.setVisible(true);
+        }
     }//GEN-LAST:event_btnSignupActionPerformed
 
     private boolean validateFields() {
@@ -245,17 +237,6 @@ public class Signup extends javax.swing.JPanel {
         comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
     }
     
-    private void setLabelUnderline(JLabel label, boolean value) {
-        Font font = label.getFont();
-        Map attributes = font.getAttributes();
-        if (value) {
-            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        } else {
-            attributes.put(TextAttribute.UNDERLINE, -1);
-        }
-        label.setFont(font.deriveFont(attributes));
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignup;
     private com.pagzone.component.CustomTitleBar customTitleBar1;

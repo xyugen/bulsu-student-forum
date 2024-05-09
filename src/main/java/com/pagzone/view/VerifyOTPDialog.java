@@ -60,7 +60,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP1.setColumns(1);
         txtOTP1.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         txtOTP1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOTP1.setText("2");
+        txtOTP1.setText("0");
         txtOTP1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtOTPFocusGained(evt);
@@ -75,7 +75,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP2.setColumns(1);
         txtOTP2.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         txtOTP2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOTP2.setText("2");
+        txtOTP2.setText("0");
         txtOTP2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtOTPFocusGained(evt);
@@ -90,7 +90,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP3.setColumns(1);
         txtOTP3.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         txtOTP3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOTP3.setText("2");
+        txtOTP3.setText("0");
         txtOTP3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtOTPFocusGained(evt);
@@ -105,7 +105,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP4.setColumns(1);
         txtOTP4.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         txtOTP4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOTP4.setText("2");
+        txtOTP4.setText("0");
         txtOTP4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtOTPFocusGained(evt);
@@ -120,7 +120,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP5.setColumns(1);
         txtOTP5.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         txtOTP5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOTP5.setText("2");
+        txtOTP5.setText("0");
         txtOTP5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtOTPFocusGained(evt);
@@ -135,7 +135,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         txtOTP6.setColumns(1);
         txtOTP6.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         txtOTP6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtOTP6.setText("2");
+        txtOTP6.setText("0");
         txtOTP6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtOTPFocusGained(evt);

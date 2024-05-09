@@ -2,7 +2,6 @@ package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.service.EmailService;
-import com.pagzone.util.OTPHelper;
 import com.pagzone.view.Login;
 import com.pagzone.view.Signup;
 import java.awt.BorderLayout;
@@ -27,11 +26,9 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         initComponents();
         initSplashScreen();
         
-        EmailService e = new EmailService();
-        e.sendOTPMail("2022500513@bulsu.edu.ph", "124353");
-        
         JFrame parentFrame = this;
         this.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 initialClick = e.getPoint();
                 getComponentAt(initialClick);
@@ -39,6 +36,7 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         });
         
         addMouseMotionListener(new MouseAdapter() {
+            @Override
             public void mouseDragged(MouseEvent e) {
                 if (parentFrame != null) {
                     // Get current location of the JFrame

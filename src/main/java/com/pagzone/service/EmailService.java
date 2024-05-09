@@ -39,7 +39,7 @@ public class EmailService {
                 <p>Thank you for registering with BulSU Student Forum. To complete your registration, please verify your email address by entering the following authentication code:</p>
 
                 <div style="padding: 6px; background-color: #f0f0f0; border-radius: 5px; display: inline-block;">
-                    <code style="font-size: 18px; color: #333;"><strong>123123</strong></code>
+                    <code style="font-size: 18px; color: #333;"><strong>%s</strong></code>
                 </div>
 
                 <p>If you did not register for an account on BulSU Student Forum, you can ignore this email.</p>
@@ -57,8 +57,9 @@ public class EmailService {
                     .buildEmail();
 
             mailer.sendMail(email);
+            System.out.println("OTP email sent.");
         } else {
-            
+            System.out.println("OTP email can't be sent.");
         }
     }
 }

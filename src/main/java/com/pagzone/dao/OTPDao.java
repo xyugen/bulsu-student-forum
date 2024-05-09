@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @author Arias
  */
 public class OTPDao {
-    public static boolean insertOTP(String email, String otpCode) {
+    public static boolean insertOTP(String email, String otpCode) throws SQLException {
         try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             String sql = "INSERT INTO otp (email, otp_code, expiration_time, is_used) VALUES (?, ?, ?, ?)";
             
@@ -33,6 +33,7 @@ public class OTPDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         return false;
     }
 

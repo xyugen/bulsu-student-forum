@@ -11,6 +11,9 @@ import com.pagzone.util.Helper;
 import com.pagzone.util.OTPHelper;
 import com.pagzone.util.UserValidator;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -201,14 +204,19 @@ public class Signup extends javax.swing.JPanel {
         if (validateFields()) {
             JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             EmailService emailService = new EmailService();
-            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true);
             String generatedOTP = OTPHelper.generateOTP();
             String email = txtEmail.getText().trim();
             
-            otpDialog.setVisible(true);
+            try {
+                OTPDao.insertOTP(email, generatedOTP);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             
-            OTPDao.insertOTP(email, generatedOTP);
             emailService.sendOTPMail(email, generatedOTP);
+            
+            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true, email);
+            otpDialog.setVisible(true);
         }
     }//GEN-LAST:event_btnSignupActionPerformed
 

@@ -13,7 +13,6 @@ import javax.swing.JTextField;
  * @author Arias
  */
 public class VerifyOTPDialog extends javax.swing.JDialog {
-
     /**
      * Creates new form VerifyOTPDialog
      * @param parent
@@ -22,6 +21,12 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
     public VerifyOTPDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public VerifyOTPDialog(java.awt.Frame parent, boolean modal, String email) {
+        super(parent, modal);
+        initComponents();
+        lblEmail.setText(email);
     }
 
     /**

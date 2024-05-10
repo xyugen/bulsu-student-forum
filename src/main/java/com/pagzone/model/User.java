@@ -13,12 +13,13 @@ import java.sql.Timestamp;
 public class User {
     private int id;
     private String email;
+    private String username;
     private Student student;
     private byte[] profilePicture;
     private boolean isAdmin;
     private Timestamp creationDate;
 
-    public User(int id, String email, Student student, byte[] profilePicture, boolean isAdmin, Timestamp creationDate) {
+    public User(int id, String email, String username, Student student, byte[] profilePicture, boolean isAdmin, Timestamp creationDate) {
         this.id = id;
         this.email = email;
         this.student = student;
@@ -28,6 +29,14 @@ public class User {
     }
 
     public User() {}
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getId() {
         return id;

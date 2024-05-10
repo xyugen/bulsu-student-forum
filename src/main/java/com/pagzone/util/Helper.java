@@ -6,6 +6,9 @@ package com.pagzone.util;
 
 import java.awt.Font;
 import java.awt.font.TextAttribute;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Map;
 import javax.swing.JLabel;
 
@@ -23,5 +26,17 @@ public class Helper {
             attributes.put(TextAttribute.UNDERLINE, -1);
         }
         label.setFont(font.deriveFont(attributes));
+    }
+    
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            // Handle the exception, e.g., logging or throwing a runtime exception
+            throw new RuntimeException("Failed to hash password.");
+        }
     }
 }

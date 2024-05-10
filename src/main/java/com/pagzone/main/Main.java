@@ -1,14 +1,12 @@
 package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import com.pagzone.service.EmailService;
 import com.pagzone.view.Login;
 import com.pagzone.view.Signup;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;

@@ -4,7 +4,9 @@
  */
 package com.pagzone.view;
 
+import com.pagzone.dao.OTPDao;
 import com.pagzone.util.Helper;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
  * @author Arias
  */
 public class VerifyOTPDialog extends javax.swing.JDialog {
+    private String email;
     /**
      * Creates new form VerifyOTPDialog
      * @param parent
@@ -26,6 +29,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
     public VerifyOTPDialog(java.awt.Frame parent, boolean modal, String email) {
         super(parent, modal);
         initComponents();
+        this.email = email;
         lblEmail.setText(email);
     }
 
@@ -303,8 +307,21 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyActionPerformed
-        JTextField textField = (JTextField) evt.getSource();
-        textField.selectAll();
+        StringBuilder otpStringBuilder = new StringBuilder();
+        ArrayList<JTextField> otpTextFields = new ArrayList<>();
+        otpTextFields.add(txtOTP1);
+        otpTextFields.add(txtOTP2);
+        otpTextFields.add(txtOTP3);
+        otpTextFields.add(txtOTP4);
+        otpTextFields.add(txtOTP5);
+        otpTextFields.add(txtOTP6);
+        
+        for (JTextField txtOTP : otpTextFields) {
+            otpStringBuilder.append(txtOTP.getText().charAt(1));
+        }
+        
+        String otpString = otpStringBuilder.toString();
+        boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
     }//GEN-LAST:event_btnVerifyActionPerformed
 
     private void txtOTPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOTPFocusGained

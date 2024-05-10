@@ -63,4 +63,5 @@
 *.ipr
 *.iws
 
+src/main/java/config.properties
 /src/main/java/config.properties

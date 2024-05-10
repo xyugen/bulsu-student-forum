@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -209,11 +210,11 @@ public class Signup extends javax.swing.JPanel {
             
             try {
                 OTPDao.insertOTP(email, generatedOTP);
+                emailService.sendOTPMail(email, generatedOTP);
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(parentFrame, "An error has occured.", "SQL Error", JOptionPane.ERROR_MESSAGE);
                 ex.printStackTrace();
             }
-            
-            emailService.sendOTPMail(email, generatedOTP);
             
             VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true, email);
             otpDialog.setVisible(true);
@@ -251,15 +252,7 @@ public class Signup extends javax.swing.JPanel {
             
             if (!UserValidator.isValidBulsuEmail(email)) {
                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                JDialog errorDialog = new JDialog(parentFrame, "Invalid Email", true);
-                JLabel errorLabel = new JLabel("<html><p>You must use your BulSU email account (@bulsu.edu.ph).</p></html>");
-                errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                errorDialog.add(errorLabel);
-                errorDialog.setSize(350, 90);
-                errorDialog.setResizable(false);
-                errorDialog.setBackground(Color.WHITE);
-                
-                errorDialog.setVisible(true);
+                JOptionPane.showMessageDialog(parentFrame, "You must use your BulSU email account (@bulsu.edu.ph).", "Invalid Email", JOptionPane.OK_OPTION);
             }
             
             return false;

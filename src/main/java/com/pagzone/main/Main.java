@@ -131,6 +131,7 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 400));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {

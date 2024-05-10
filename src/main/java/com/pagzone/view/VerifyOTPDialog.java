@@ -203,15 +203,10 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEmail)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnResend, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitle)
+                    .addComponent(lblEmail)
+                    .addComponent(btnResend, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlHeaderLayout.setVerticalGroup(
@@ -304,6 +299,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyActionPerformed
@@ -317,11 +313,14 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         otpTextFields.add(txtOTP6);
         
         for (JTextField txtOTP : otpTextFields) {
-            otpStringBuilder.append(txtOTP.getText().charAt(1));
+            otpStringBuilder.append(txtOTP.getText().charAt(0));
         }
         
         String otpString = otpStringBuilder.toString();
+        // FIXME: SQL database connection closing automatically.
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
+        System.out.println(otpString);
+        System.out.println("Is valid OTP: " + isValidOTP);
     }//GEN-LAST:event_btnVerifyActionPerformed
 
     private void txtOTPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOTPFocusGained

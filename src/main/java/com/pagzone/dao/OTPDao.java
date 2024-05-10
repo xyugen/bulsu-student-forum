@@ -39,27 +39,22 @@ public class OTPDao {
 
     public static boolean verifyOTP(String email, String otpCode) {
         try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
-            // SQL query to retrieve OTP details for the given email and code
             String sql = "SELECT * FROM otp WHERE email = ? AND otp_code = ? AND expiration_time > ? AND is_used = false";
             
-            // Prepare statement
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, email);
                 stmt.setString(2, otpCode);
                 stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
                 
-                // Execute query
                 try (ResultSet rs = stmt.executeQuery()) {
-                    // If OTP record found and not expired
                     if (rs.next()) {
-                        // Mark OTP as used
                         markOTPAsUsed(conn, rs.getInt("id"));
                         return true;
                     }
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle or log exception
+            e.printStackTrace();
         }
         return false;
     }

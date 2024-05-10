@@ -317,7 +317,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         }
         
         String otpString = otpStringBuilder.toString();
-        // FIXME: SQL database connection closing automatically.
+        
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
         System.out.println(otpString);
         System.out.println("Is valid OTP: " + isValidOTP);

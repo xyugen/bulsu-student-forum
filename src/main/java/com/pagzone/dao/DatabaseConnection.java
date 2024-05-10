@@ -5,9 +5,12 @@
 package com.pagzone.dao;
 
 import com.pagzone.props.AppConfig;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.sql.DataSource;
 
 /**
  *
@@ -20,23 +23,18 @@ public class DatabaseConnection {
 
     private static DatabaseConnection instance;
     private Connection connection;
-
-    private DatabaseConnection() {
-        try {
-            connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-        } catch (SQLException err) {
-            err.printStackTrace();
-        }
+    
+    private static final DataSource dataSource;
+    
+    static {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(JDBC_URL);
+        config.setUsername(USERNAME);
+        config.setPassword(PASSWORD);
+        dataSource = new HikariDataSource(config);
     }
 
-    public static synchronized DatabaseConnection getInstance() {
-        if (instance == null) {
-            instance = new DatabaseConnection();
-        }
-        return instance;
-    }
-
-    public Connection getConnection() {
-        return connection;
+    public static DataSource getDataSource() {
+        return dataSource;
     }
 }

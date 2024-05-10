@@ -8,6 +8,7 @@ import com.pagzone.dao.OTPDao;
 import com.pagzone.util.Helper;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -319,8 +320,13 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         String otpString = otpStringBuilder.toString();
         
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
-        System.out.println(otpString);
-        System.out.println("Is valid OTP: " + isValidOTP);
+        if (isValidOTP) {
+            JOptionPane.showMessageDialog(rootPane, "User account has been successfully created. Log in to your new account.",
+                    "Sign Up Success", JOptionPane.OK_OPTION);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "OTP is not valid.", "Invalid OTP", JOptionPane.OK_OPTION);
+        }
     }//GEN-LAST:event_btnVerifyActionPerformed
 
     private void txtOTPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOTPFocusGained

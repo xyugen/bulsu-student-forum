@@ -116,6 +116,26 @@ public class UserDao {
         return null; // User not found
     }
     
+    public static User getUserByEmailOrUsername(String value) {
+        String sql = "SELECT * FROM users WHERE email = ? OR username = ?";
+        
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, value);
+            stmt.setString(2, value);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return extractUserFromResultSet(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return null; // User not found
+    }
+    
     private static User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));

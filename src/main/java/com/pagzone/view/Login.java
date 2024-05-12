@@ -4,6 +4,7 @@
  */
 package com.pagzone.view;
 
+import com.pagzone.dao.UserDao;
 import com.pagzone.model.CardLayoutChangeListener;
 import com.pagzone.util.UserValidator;
 import com.pagzone.util.Helper;
@@ -50,7 +51,6 @@ public class Login extends javax.swing.JPanel {
         customTitleBar1 = new com.pagzone.component.CustomTitleBar();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setForeground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         setPreferredSize(new java.awt.Dimension(301, 411));
 
@@ -58,19 +58,15 @@ public class Login extends javax.swing.JPanel {
         lblChatIcon.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\chat_quote_icon.png"));
 
         lblTitle.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("<html><p><span style=\"color:#C72424;\">BulSU</span> Student Forum</p></html>");
 
         lblWelcomeBack.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
-        lblWelcomeBack.setForeground(new java.awt.Color(0, 0, 0));
         lblWelcomeBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWelcomeBack.setText("Welcome Back");
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(0, 0, 0));
-        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+        txtUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email/Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -87,9 +83,7 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-        ptxtPassword.setBackground(new java.awt.Color(255, 255, 255));
         ptxtPassword.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        ptxtPassword.setForeground(new java.awt.Color(0, 0, 0));
         ptxtPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
 
         btnLogin.setBackground(new java.awt.Color(199, 36, 36));
@@ -104,11 +98,9 @@ public class Login extends javax.swing.JPanel {
         });
 
         pnlSignUpLabels.setBackground(new java.awt.Color(255, 255, 255));
-        pnlSignUpLabels.setForeground(new java.awt.Color(0, 0, 0));
         pnlSignUpLabels.setPreferredSize(new java.awt.Dimension(20, 20));
 
         lblNoAccount.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        lblNoAccount.setForeground(new java.awt.Color(0, 0, 0));
         lblNoAccount.setText("Don't have an account?");
         pnlSignUpLabels.add(lblNoAccount);
 
@@ -212,6 +204,10 @@ public class Login extends javax.swing.JPanel {
         if (UserValidator.verifyLogin(username, password)) {
             setTextFieldBorder(txtUsername, "Username", new Color(153,153,153));
             setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+            
+            if (UserDao.getUserByEmailOrUsername(username) != null) {
+                
+            }
         } else {
             if (UserValidator.isValidUsername(username)) {
                 setTextFieldBorder(txtUsername, "Username", new Color(153,153,153));

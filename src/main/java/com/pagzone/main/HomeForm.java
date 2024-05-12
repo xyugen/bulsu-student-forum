@@ -75,6 +75,7 @@ public class HomeForm extends javax.swing.JFrame {
         lblTItle = new javax.swing.JLabel();
         pnlContent = new javax.swing.JPanel();
         sidebar1 = new com.pagzone.view.sidebar.Sidebar();
+        pnlMainCard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BulSU Student Forum");
@@ -113,23 +114,22 @@ public class HomeForm extends javax.swing.JFrame {
         getContentPane().add(pnlHeader, java.awt.BorderLayout.PAGE_START);
 
         pnlContent.setOpaque(false);
-
-        javax.swing.GroupLayout pnlContentLayout = new javax.swing.GroupLayout(pnlContent);
-        pnlContent.setLayout(pnlContentLayout);
-        pnlContentLayout.setHorizontalGroup(
-            pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlContentLayout.createSequentialGroup()
-                .addComponent(sidebar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(678, Short.MAX_VALUE))
-        );
-        pnlContentLayout.setVerticalGroup(
-            pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContentLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(sidebar1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
+        pnlContent.setLayout(new java.awt.BorderLayout());
         getContentPane().add(pnlContent, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(sidebar1, java.awt.BorderLayout.LINE_START);
+
+        javax.swing.GroupLayout pnlMainCardLayout = new javax.swing.GroupLayout(pnlMainCard);
+        pnlMainCard.setLayout(pnlMainCardLayout);
+        pnlMainCardLayout.setHorizontalGroup(
+            pnlMainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 678, Short.MAX_VALUE)
+        );
+        pnlMainCardLayout.setVerticalGroup(
+            pnlMainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(pnlMainCard, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -164,6 +164,7 @@ public class HomeForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblTItle;
     private javax.swing.JPanel pnlContent;
     private javax.swing.JPanel pnlHeader;
+    private javax.swing.JPanel pnlMainCard;
     private com.pagzone.view.sidebar.Sidebar sidebar1;
     // End of variables declaration//GEN-END:variables
 }

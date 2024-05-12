@@ -4,7 +4,11 @@
  */
 package com.pagzone.view.sidebar;
 
-import javax.swing.JButton;
+import com.pagzone.main.Main;
+import com.pagzone.service.SessionManager;
+import java.awt.Window;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -111,7 +115,17 @@ public class Sidebar extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnLogoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutbtnActionPerformed
-        // TODO add your handling code here:
+        SessionManager instance = SessionManager.getInstance();
+        Window parentFrame = SwingUtilities.getWindowAncestor(this);
+        
+        int choice = JOptionPane.showConfirmDialog(parentFrame, "Are you sure you want to log out?",
+                "Log Out", JOptionPane.YES_NO_OPTION);
+        if (choice == 0) {
+            instance.endSession();
+            new Main().setVisible(true);
+
+            parentFrame.dispose();
+        }
     }//GEN-LAST:event_btnLogoutbtnActionPerformed
 
 

@@ -5,12 +5,21 @@
 package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.pagzone.view.Header;
+import com.pagzone.view.sidebar.Sidebar;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
  *
@@ -18,11 +27,13 @@ import javax.swing.JFrame;
  */
 public class HomeForm extends javax.swing.JFrame {
     private Point initialClick;
+    Sidebar pnlSidebar;
     
     public HomeForm() {
         initComponents();
-        //this.setLayout(new MigLayout("wrap 1"));
         setBackground(new Color(1, 1, 1, 0.45f));
+        
+        initAnimation();
         
         JFrame parentFrame = this;
         pnlHeader.addMouseListener(new MouseAdapter() {
@@ -30,12 +41,12 @@ public class HomeForm extends javax.swing.JFrame {
             public void mousePressed(MouseEvent e) {
                 initialClick = e.getPoint();
                 getComponentAt(initialClick);
-                pnlHeader.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
             }
             
             @Override
             public void mouseReleased(MouseEvent e) {
-                pnlHeader.setCursor(Cursor.getDefaultCursor());
+                setCursor(Cursor.getDefaultCursor());
             }
         });
         
@@ -65,71 +76,77 @@ public class HomeForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void init() {
+        pnlSidebar = new Sidebar();
+    }
+    
+    private void initAnimation() {
+        init();
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                pnlLoadingScreen.setSize(getWidth(), (int) (getHeight() - 460 * fraction));
+            }
+            
+            @Override
+            public void end() {
+                pnlSidebar.setVisible(true);
+                initSidebarAnimation();
+                pnlHome.add(pnlSidebar, BorderLayout.WEST);
+                pnlHome.remove(pnlLoadingScreen);
+                pnlHome.revalidate();
+                pnlHome.repaint();
+            }
+        };
+        
+        Animator animator = new Animator(1000, target);
+        animator.setAcceleration(0.5f);
+        animator.setDeceleration(0.5f);
+        animator.setResolution(0);
+        
+        Timer delayTimer = new Timer(1500, (ActionEvent e) -> {
+            animator.start();
+        });
+        delayTimer.setRepeats(false);
+        delayTimer.start();
+    }
 
+    private void initSidebarAnimation() {
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                pnlSidebar.setSize((int) (0 + 50 * fraction), getHeight());
+            }
+        };
+        
+        Animator animator = new Animator(1000, target);
+        animator.setAcceleration(0.5f);
+        animator.setDeceleration(0.5f);
+        animator.setResolution(0);
+        animator.start();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlHeader = new javax.swing.JPanel();
-        customTitleBar1 = new com.pagzone.component.CustomTitleBar();
-        lblTItle = new javax.swing.JLabel();
-        pnlContent = new javax.swing.JPanel();
-        sidebar1 = new com.pagzone.view.sidebar.Sidebar();
-        pnlMainCard = new javax.swing.JPanel();
+        pnlHome = new javax.swing.JPanel();
+        pnlLoadingScreen = new com.pagzone.view.HomeLoadingScreen();
+        pnlHeader = new com.pagzone.view.Header();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BulSU Student Forum");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlHeader.setBackground(new java.awt.Color(199, 36, 36));
+        pnlHome.setLayout(new java.awt.BorderLayout());
+        pnlHome.add(pnlLoadingScreen, java.awt.BorderLayout.CENTER);
+        pnlHome.add(pnlHeader, java.awt.BorderLayout.PAGE_START);
 
-        lblTItle.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        lblTItle.setForeground(new java.awt.Color(255, 255, 255));
-        lblTItle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTItle.setText("BulSU Student Forum");
-
-        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
-        pnlHeader.setLayout(pnlHeaderLayout);
-        pnlHeaderLayout.setHorizontalGroup(
-            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(customTitleBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(236, 236, 236)
-                .addComponent(lblTItle, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(295, Short.MAX_VALUE))
-        );
-        pnlHeaderLayout.setVerticalGroup(
-            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTItle)
-                    .addComponent(customTitleBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        getContentPane().add(pnlHeader, java.awt.BorderLayout.PAGE_START);
-
-        pnlContent.setOpaque(false);
-        pnlContent.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(pnlContent, java.awt.BorderLayout.PAGE_END);
-        getContentPane().add(sidebar1, java.awt.BorderLayout.LINE_START);
-
-        javax.swing.GroupLayout pnlMainCardLayout = new javax.swing.GroupLayout(pnlMainCard);
-        pnlMainCard.setLayout(pnlMainCardLayout);
-        pnlMainCardLayout.setHorizontalGroup(
-            pnlMainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
-        );
-        pnlMainCardLayout.setVerticalGroup(
-            pnlMainCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(pnlMainCard, java.awt.BorderLayout.CENTER);
+        getContentPane().add(pnlHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 726, 456));
 
         pack();
         setLocationRelativeTo(null);
@@ -160,11 +177,8 @@ public class HomeForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.pagzone.component.CustomTitleBar customTitleBar1;
-    private javax.swing.JLabel lblTItle;
-    private javax.swing.JPanel pnlContent;
-    private javax.swing.JPanel pnlHeader;
-    private javax.swing.JPanel pnlMainCard;
-    private com.pagzone.view.sidebar.Sidebar sidebar1;
+    private com.pagzone.view.Header pnlHeader;
+    private javax.swing.JPanel pnlHome;
+    private com.pagzone.view.HomeLoadingScreen pnlLoadingScreen;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,9 +32,14 @@ public class HomeLoadingScreen extends javax.swing.JPanel {
         setBackground(new java.awt.Color(199, 36, 36));
         setLayout(new java.awt.GridLayout(2, 0));
 
+        jLabel1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ball_animation_white.gif"))); // NOI18N
+        jLabel1.setText("Logging in...");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         add(jLabel1);
 
         jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N

@@ -6,12 +6,17 @@ package com.pagzone.view;
 
 import com.pagzone.dao.UserDao;
 import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.model.User;
+import com.pagzone.service.SessionManager;
 import com.pagzone.util.UserValidator;
 import com.pagzone.util.Helper;
 import java.awt.Color;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -201,31 +206,52 @@ public class Login extends javax.swing.JPanel {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String username = txtUsername.getText().trim();
         String password = new String(ptxtPassword.getPassword()).trim();
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (UserValidator.verifyLogin(username, password)) {
-            setTextFieldBorder(txtUsername, "Username", new Color(153,153,153));
-            setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+            Helper.setTextFieldBorder(txtUsername, "Email/Username", new Color(153,153,153));
+            Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
             
-            if (UserDao.getUserByEmailOrUsername(username) != null) {
-                
+            User loginUser = UserDao.getUserByEmailOrUsername(username);
+            if (loginUser != null) {
+                if (loginUser.getUsername().isEmpty() || loginUser.getUsername() == null) {
+                    // Set new username
+                    String newUsername = JOptionPane.showInputDialog(parentFrame, "Input your username", "New Account", JOptionPane.OK_OPTION);
+                    while (!UserValidator.isValidUsername(newUsername)) {
+                        if (newUsername == null) return;
+                        System.out.println(newUsername);
+                        newUsername = JOptionPane.showInputDialog(parentFrame, "Input proper username", "Invalid Username", JOptionPane.OK_OPTION);
+                    }
+                    
+                    newUsername = newUsername.trim();
+                    
+                    // Verify and update database
+                    UserDao.updateUsername(loginUser.getId(), newUsername);
+                    loginUser.setUsername(newUsername);
+                }
+                // Create session
+                SessionManager sessionManager = SessionManager.getInstance();
+                sessionManager.createSession(loginUser);
             }
         } else {
-            if (UserValidator.isValidUsername(username)) {
-                setTextFieldBorder(txtUsername, "Username", new Color(153,153,153));
+            // Validate email/username input
+            if (UserValidator.isValidUsername(username) || UserValidator.isValidEmail(username)) {
+                Helper.setTextFieldBorder(txtUsername, "Email/Username", new Color(153,153,153));
+                
+                if (!UserDao.verifyCredentials(username, password)) {
+                    JOptionPane.showMessageDialog(parentFrame, "Username or password is incorrect.", "Credential Error", JOptionPane.OK_OPTION);
+                }
             } else {
-                setTextFieldBorder(txtUsername, "Username", new Color(199,36,36));
+                Helper.setTextFieldBorder(txtUsername, "Email/Username", new Color(199,36,36));
             }
             
+            // Validate password
             if (UserValidator.isValidPassword(password)) {
-                setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+                Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
             } else {
-                setTextFieldBorder(ptxtPassword, "Password", new Color(199,36,36));
+                Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(199,36,36));
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void setTextFieldBorder(JTextField comp, String title, Color color) {
-        comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

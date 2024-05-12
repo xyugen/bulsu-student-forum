@@ -4,6 +4,7 @@
  */
 package com.pagzone.util;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.security.MessageDigest;
@@ -11,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -38,5 +40,9 @@ public class Helper {
             // Handle the exception, e.g., logging or throwing a runtime exception
             throw new RuntimeException("Failed to hash password.");
         }
+    }
+    
+    public static void setTextFieldBorder(JTextField comp, String title, Color color) {
+        comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
     }
 }

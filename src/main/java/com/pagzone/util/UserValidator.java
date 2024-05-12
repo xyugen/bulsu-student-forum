@@ -1,8 +1,7 @@
 package com.pagzone.util;
 
-import com.sanctionco.jmail.EmailValidator;
+import com.pagzone.dao.UserDao;
 import com.sanctionco.jmail.JMail;
-import jakarta.mail.internet.InternetAddress;
 import java.util.regex.Pattern;
 
 public class UserValidator {
@@ -17,9 +16,9 @@ public class UserValidator {
     private UserValidator() { }
     
     public static boolean verifyLogin(String username, String password) {
-        if (!isValidUsername(username)) return false;
+        if (!isValidUsername(username) && !isValidEmail(username)) return false;
         if (!isValidPassword(password)) return false;
-        return true;
+        return UserDao.verifyCredentials(username, password);
     }
 
     public static boolean verifySignup(String email, String password, String confirmPassword) {

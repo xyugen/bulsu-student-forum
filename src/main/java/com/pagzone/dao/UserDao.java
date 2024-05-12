@@ -136,16 +136,38 @@ public class UserDao {
         return null; // User not found
     }
     
+    public static boolean verifyCredentials(String username, String password) {
+        String hashedPassword = Helper.hashPassword(password);
+        String sql = "SELECT * FROM users WHERE (email = ? OR username = ?) AND password = ?";
+        
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, username);
+            stmt.setString(3, hashedPassword);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
     private static User extractUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));
         user.setEmail(rs.getString("email"));
         user.setUsername(rs.getString("username"));
         user.setIsAdmin(rs.getBoolean("is_admin"));
-        user.setCreationDate(rs.getTimestamp("creation_date"));
+        user.setCreationDate(rs.getTimestamp("creation_time"));
         
         Student student = new Student();
-        student.setId(rs.getInt("student_id"));
+        //student.setId(rs.getInt("student_id"));
         user.setStudent(student);
         
         user.setProfilePicture(rs.getBytes("profile_picture"));

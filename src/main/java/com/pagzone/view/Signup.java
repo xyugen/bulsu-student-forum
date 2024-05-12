@@ -7,6 +7,7 @@ package com.pagzone.view;
 import com.pagzone.dao.OTPDao;
 import com.pagzone.dao.UserDao;
 import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.model.User;
 import com.pagzone.service.EmailService;
 import com.pagzone.util.Helper;
 import com.pagzone.util.OTPHelper;
@@ -218,7 +219,7 @@ public class Signup extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
             
-            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true, email, Helper.hashPassword(password));
+            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true, email, password);
             otpDialog.setVisible(true);
         }
     }//GEN-LAST:event_btnSignupActionPerformed
@@ -227,43 +228,44 @@ public class Signup extends javax.swing.JPanel {
         String email = txtEmail.getText().trim();
         String password = new String(ptxtPassword.getPassword()).trim();
         String confirmPassword = new String(ptxtConfirmPassword.getPassword()).trim();
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (UserValidator.verifySignup(email, password, confirmPassword)) {
-            setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
-            setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
-            setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
+            Helper.setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
+            Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+            Helper.setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
+            
+            // verify if user already exists
+            User user = UserDao.getUserByEmail(email);
+            if (user != null) {
+                JOptionPane.showMessageDialog(parentFrame, "An account with this email has already been created.", "Duplicate Email", JOptionPane.OK_OPTION);
+                return false;
+            }
             
             return true;
         } else {
-            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             if (UserValidator.isValidEmail(email)) {
-                setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
+                Helper.setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
                 if (!UserValidator.isValidBulsuEmail(email)) {
                     JOptionPane.showMessageDialog(parentFrame, "You must use your BulSU email account (@bulsu.edu.ph).", "Invalid Email", JOptionPane.OK_OPTION);
-                } else if (UserDao.getUserByEmail(email) != null) {
-                    JOptionPane.showMessageDialog(parentFrame, "An account with this email has already been created.", "Duplicate Email", JOptionPane.OK_OPTION);
                 }
             } else {
-                setTextFieldBorder(txtEmail, "E-mail", new Color(199,36,36));
+                Helper.setTextFieldBorder(txtEmail, "E-mail", new Color(199,36,36));
             }
             
             if (UserValidator.isValidPassword(password)) {
-                setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
+                Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
             } else {
-                setTextFieldBorder(ptxtPassword, "Password", new Color(199,36,36));
+                Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(199,36,36));
             }
             
             if (UserValidator.isValidPassword(password) && password.equals(confirmPassword) ) {
-                setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
+                Helper.setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
             } else {
-                setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(199,36,36));
+                Helper.setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(199,36,36));
             }
             
             return false;
         }
-    }
-    
-    private void setTextFieldBorder(JTextField comp, String title, Color color) {
-        comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

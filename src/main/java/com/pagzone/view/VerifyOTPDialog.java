@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  */
 public class VerifyOTPDialog extends javax.swing.JDialog {
     private String email;
-    private String hashedPassword;
+    private String password;
     /**
      * Creates new form VerifyOTPDialog
      * @param parent
@@ -29,11 +29,11 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         initComponents();
     }
     
-    public VerifyOTPDialog(java.awt.Frame parent, boolean modal, String email, String hashedPassword) {
+    public VerifyOTPDialog(java.awt.Frame parent, boolean modal, String email, String password) {
         super(parent, modal);
         initComponents();
         this.email = email;
-        this.hashedPassword = hashedPassword;
+        this.password = password;
         lblEmail.setText(email);
     }
 
@@ -329,7 +329,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
         if (isValidOTP) {
-            UserDao.insertUser(email, hashedPassword);
+            UserDao.insertUser(email, password);
             JOptionPane.showMessageDialog(rootPane, "User account has been successfully created. Log in to your new account.",
                     "Sign Up Success", JOptionPane.OK_OPTION);
             this.dispose();

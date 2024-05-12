@@ -5,6 +5,7 @@
 package com.pagzone.view;
 
 import com.pagzone.dao.OTPDao;
+import com.pagzone.dao.UserDao;
 import com.pagzone.util.Helper;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JTextField;
  */
 public class VerifyOTPDialog extends javax.swing.JDialog {
     private String email;
+    private String hashedPassword;
     /**
      * Creates new form VerifyOTPDialog
      * @param parent
@@ -27,10 +29,11 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         initComponents();
     }
     
-    public VerifyOTPDialog(java.awt.Frame parent, boolean modal, String email) {
+    public VerifyOTPDialog(java.awt.Frame parent, boolean modal, String email, String hashedPassword) {
         super(parent, modal);
         initComponents();
         this.email = email;
+        this.hashedPassword = hashedPassword;
         lblEmail.setText(email);
     }
 
@@ -204,10 +207,15 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle)
-                    .addComponent(lblEmail)
-                    .addComponent(btnResend, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEmail)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnResend, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlHeaderLayout.setVerticalGroup(
@@ -220,8 +228,8 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCodeSent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnResend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
@@ -321,6 +329,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
         if (isValidOTP) {
+            UserDao.insertUser(email, otpString, hashedPassword);
             JOptionPane.showMessageDialog(rootPane, "User account has been successfully created. Log in to your new account.",
                     "Sign Up Success", JOptionPane.OK_OPTION);
             this.dispose();

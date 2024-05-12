@@ -207,6 +207,7 @@ public class Signup extends javax.swing.JPanel {
             EmailService emailService = new EmailService();
             String generatedOTP = OTPHelper.generateOTP();
             String email = txtEmail.getText().trim();
+            String password = new String(ptxtPassword.getPassword()).trim();
             
             try {
                 OTPDao.insertOTP(email, generatedOTP);
@@ -216,7 +217,7 @@ public class Signup extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
             
-            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true, email);
+            VerifyOTPDialog otpDialog = new VerifyOTPDialog(parentFrame, true, email, Helper.hashPassword(password));
             otpDialog.setVisible(true);
         }
     }//GEN-LAST:event_btnSignupActionPerformed
@@ -234,6 +235,10 @@ public class Signup extends javax.swing.JPanel {
         } else {
             if (UserValidator.isValidEmail(email)) {
                 setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
+                if (!UserValidator.isValidBulsuEmail(email)) {
+                    JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    JOptionPane.showMessageDialog(parentFrame, "You must use your BulSU email account (@bulsu.edu.ph).", "Invalid Email", JOptionPane.OK_OPTION);
+                }
             } else {
                 setTextFieldBorder(txtEmail, "E-mail", new Color(199,36,36));
             }
@@ -248,11 +253,6 @@ public class Signup extends javax.swing.JPanel {
                 setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(153,153,153));
             } else {
                 setTextFieldBorder(ptxtConfirmPassword, "Confirm Password", new Color(199,36,36));
-            }
-            
-            if (!UserValidator.isValidBulsuEmail(email)) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                JOptionPane.showMessageDialog(parentFrame, "You must use your BulSU email account (@bulsu.edu.ph).", "Invalid Email", JOptionPane.OK_OPTION);
             }
             
             return false;

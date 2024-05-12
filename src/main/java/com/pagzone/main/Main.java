@@ -18,7 +18,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLayoutChangeListener {
+public class Main extends javax.swing.JFrame implements com.pagzone.props.CardLayoutChangeListener {
     private Point initialClick;
     private JPanel pnlCardContainer;
 
@@ -27,7 +27,7 @@ public class Main extends javax.swing.JFrame implements com.pagzone.model.CardLa
         initSplashScreen();
         
         JFrame parentFrame = this;
-        this.addMouseListener(new MouseAdapter() {
+        parentFrame.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 initialClick = e.getPoint();

@@ -6,7 +6,7 @@ package com.pagzone.view;
 
 import com.pagzone.dao.OTPDao;
 import com.pagzone.dao.UserDao;
-import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.props.CardLayoutChangeListener;
 import com.pagzone.model.User;
 import com.pagzone.service.EmailService;
 import com.pagzone.util.Helper;

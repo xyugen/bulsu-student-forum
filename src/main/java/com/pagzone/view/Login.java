@@ -5,7 +5,7 @@
 package com.pagzone.view;
 
 import com.pagzone.dao.UserDao;
-import com.pagzone.model.CardLayoutChangeListener;
+import com.pagzone.props.CardLayoutChangeListener;
 import com.pagzone.model.User;
 import com.pagzone.service.SessionManager;
 import com.pagzone.util.UserValidator;

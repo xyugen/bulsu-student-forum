@@ -23,7 +23,7 @@ public class UserDao {
     
     public static boolean insertUser(String email, String password, String username) {
         String hashedPassword = Helper.hashPassword(password);
-        String sql = "INSERT INTO users (email, password, username) VALUES (?, ?)";
+        String sql = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

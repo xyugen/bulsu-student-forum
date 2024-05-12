@@ -5,6 +5,7 @@
 package com.pagzone.view;
 
 import com.pagzone.dao.OTPDao;
+import com.pagzone.dao.UserDao;
 import com.pagzone.model.CardLayoutChangeListener;
 import com.pagzone.service.EmailService;
 import com.pagzone.util.Helper;
@@ -233,11 +234,13 @@ public class Signup extends javax.swing.JPanel {
             
             return true;
         } else {
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             if (UserValidator.isValidEmail(email)) {
                 setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
                 if (!UserValidator.isValidBulsuEmail(email)) {
-                    JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                     JOptionPane.showMessageDialog(parentFrame, "You must use your BulSU email account (@bulsu.edu.ph).", "Invalid Email", JOptionPane.OK_OPTION);
+                } else if (UserDao.getUserByEmail(email) != null) {
+                    JOptionPane.showMessageDialog(parentFrame, "An account with this email has already been created.", "Duplicate Email", JOptionPane.OK_OPTION);
                 }
             } else {
                 setTextFieldBorder(txtEmail, "E-mail", new Color(199,36,36));

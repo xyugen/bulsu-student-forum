@@ -329,7 +329,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
         if (isValidOTP) {
-            UserDao.insertUser(email, otpString, hashedPassword);
+            UserDao.insertUser(email, hashedPassword);
             JOptionPane.showMessageDialog(rootPane, "User account has been successfully created. Log in to your new account.",
                     "Sign Up Success", JOptionPane.OK_OPTION);
             this.dispose();

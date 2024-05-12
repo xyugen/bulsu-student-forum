@@ -37,10 +37,9 @@ public class CustomTitleBar extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         setLayout(flowLayout1);
 
-        btnClose.setBackground(new java.awt.Color(255, 255, 255));
         btnClose.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         btnClose.setForeground(new java.awt.Color(102, 255, 102));
-        btnClose.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\close_icon.png"));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/close_icon.png"))); // NOI18N
         btnClose.setBorder(null);
         btnClose.setBorderPainted(false);
         btnClose.setContentAreaFilled(false);
@@ -53,10 +52,9 @@ public class CustomTitleBar extends javax.swing.JPanel {
         add(btnClose);
         add(filler1);
 
-        btnMinimize.setBackground(new java.awt.Color(255, 255, 255));
         btnMinimize.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
         btnMinimize.setForeground(new java.awt.Color(255, 51, 51));
-        btnMinimize.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\minimize_icon.png"));
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minimize_icon.png"))); // NOI18N
         btnMinimize.setBorder(null);
         btnMinimize.setBorderPainted(false);
         btnMinimize.setContentAreaFilled(false);

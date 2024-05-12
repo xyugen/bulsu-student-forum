@@ -5,6 +5,7 @@
 package com.pagzone.view;
 
 import com.pagzone.dao.UserDao;
+import com.pagzone.main.HomeForm;
 import com.pagzone.props.CardLayoutChangeListener;
 import com.pagzone.model.User;
 import com.pagzone.service.SessionManager;
@@ -231,6 +232,10 @@ public class Login extends javax.swing.JPanel {
                 // Create session
                 SessionManager sessionManager = SessionManager.getInstance();
                 sessionManager.createSession(loginUser);
+                
+                // Open Home form
+                new HomeForm().setVisible(true);
+                parentFrame.dispose();
             }
         } else {
             // Validate email/username input

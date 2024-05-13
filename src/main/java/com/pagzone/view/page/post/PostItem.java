@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.pagzone.view.post;
+package com.pagzone.view.page.post;
 
 import com.pagzone.model.Post;
 import com.pagzone.util.Helper;
@@ -12,19 +12,28 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Arias
  */
-public final class PostPane extends javax.swing.JPanel {
+public final class PostItem extends javax.swing.JPanel {
     private Post post;
-    
-    public PostPane() {
+    /**
+     * Creates new form PostItem
+     */
+    public PostItem() {
         initComponents();
-        initLayout();
+        setLayout(new MigLayout("wrap 2", "[grow, fill][]", "[][]"));
+        add(lblTitle, "span 2");
+        add(lblUsername);
+        add(lblTimestamp);
     }
     
-    public PostPane(Post post) {
+    public PostItem(Post post) {
         initComponents();
-        initLayout();
+        setLayout(new MigLayout("wrap 2", "[grow, fill][]", "[][]"));
+        add(lblTitle, "span 2");
+        add(lblUsername);
+        add(lblTimestamp);
         
         this.post = post;
+        
         showPostDetails();
     }
     
@@ -36,15 +45,6 @@ public final class PostPane extends javax.swing.JPanel {
         lblTitle.setText(post.getTitle());
         lblUsername.setText(post.getUser().getUsername());
         lblTimestamp.setText(Helper.formatTimestamp(post.getTimestamp()));
-        lblBody.setText(post.getBody());
-    }
-    
-    private void initLayout() {
-        setLayout(new MigLayout("wrap 2", "[][]", "[][][fill, grow]"));
-        add(lblTitle, "span 2");
-        add(lblUsername);
-        add(lblTimestamp);
-        add(lblBody, "span 2, gaptop 5");
     }
 
     /**
@@ -59,41 +59,32 @@ public final class PostPane extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         lblTimestamp = new javax.swing.JLabel();
-        lblBody = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(199, 36, 36));
+        setForeground(new java.awt.Color(0, 0, 0));
         setLayout(null);
 
-        lblTitle.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(199, 36, 36));
+        lblTitle.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Title");
-        lblTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         add(lblTitle);
-        lblTitle.setBounds(6, 6, 230, 37);
+        lblTitle.setBounds(7, 7, 38, 28);
 
-        lblUsername.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        lblUsername.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsername.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username");
         add(lblUsername);
-        lblUsername.setBounds(6, 40, 61, 19);
+        lblUsername.setBounds(10, 40, 70, 19);
 
         lblTimestamp.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        lblTimestamp.setForeground(new java.awt.Color(51, 51, 51));
+        lblTimestamp.setForeground(new java.awt.Color(255, 255, 255));
         lblTimestamp.setText("Timestamp");
         add(lblTimestamp);
-        lblTimestamp.setBounds(110, 40, 66, 19);
-
-        lblBody.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
-        lblBody.setForeground(new java.awt.Color(0, 0, 0));
-        lblBody.setText("Body");
-        lblBody.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        add(lblBody);
-        lblBody.setBounds(10, 60, 120, 123);
+        lblTimestamp.setBounds(80, 40, 70, 20);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblBody;
     private javax.swing.JLabel lblTimestamp;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;

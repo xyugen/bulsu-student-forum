@@ -33,8 +33,8 @@ public class Write extends javax.swing.JPanel {
     private void initComponents() {
 
         lblPageTitle = new javax.swing.JLabel();
-        spnlTextPane = new javax.swing.JScrollPane();
-        txtpPost = new javax.swing.JTextPane();
+        spnlTextArea = new javax.swing.JScrollPane();
+        txtaPost = new javax.swing.JTextArea();
         btnPost = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -48,13 +48,15 @@ public class Write extends javax.swing.JPanel {
         add(lblPageTitle);
         lblPageTitle.setBounds(150, 10, 100, 28);
 
-        txtpPost.setBackground(new java.awt.Color(255, 255, 255));
-        txtpPost.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtpPost.setForeground(new java.awt.Color(0, 0, 0));
-        spnlTextPane.setViewportView(txtpPost);
+        txtaPost.setBackground(new java.awt.Color(255, 255, 255));
+        txtaPost.setColumns(20);
+        txtaPost.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtaPost.setForeground(new java.awt.Color(0, 0, 0));
+        txtaPost.setRows(5);
+        spnlTextArea.setViewportView(txtaPost);
 
-        add(spnlTextPane);
-        spnlTextPane.setBounds(30, 40, 340, 230);
+        add(spnlTextArea);
+        spnlTextArea.setBounds(60, 120, 260, 110);
 
         btnPost.setBackground(new java.awt.Color(199, 36, 36));
         btnPost.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -62,14 +64,14 @@ public class Write extends javax.swing.JPanel {
         btnPost.setText("Post");
         btnPost.setBorder(null);
         add(btnPost);
-        btnPost.setBounds(100, 290, 29, 22);
+        btnPost.setBounds(100, 290, 160, 22);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPost;
     private javax.swing.JLabel lblPageTitle;
-    private javax.swing.JScrollPane spnlTextPane;
-    private javax.swing.JTextPane txtpPost;
+    private javax.swing.JScrollPane spnlTextArea;
+    private javax.swing.JTextArea txtaPost;
     // End of variables declaration//GEN-END:variables
 }

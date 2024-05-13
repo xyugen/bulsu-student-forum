@@ -208,43 +208,50 @@ public class Login extends javax.swing.JPanel {
         String username = txtUsername.getText().trim();
         String password = new String(ptxtPassword.getPassword()).trim();
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        
         if (UserValidator.verifyLogin(username, password)) {
             Helper.setTextFieldBorder(txtUsername, "Email/Username", new Color(153,153,153));
             Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));
             
-            User loginUser = UserDao.getUserByEmailOrUsername(username);
-            if (loginUser != null) {
-                if (loginUser.getUsername().isEmpty() || loginUser.getUsername() == null) {
-                    // Set new username
-                    String newUsername = JOptionPane.showInputDialog(parentFrame, "Input your username", "New Account", JOptionPane.OK_OPTION);
-                    while (!UserValidator.isValidUsername(newUsername)) {
-                        if (newUsername == null) return;
-                        System.out.println(newUsername);
-                        newUsername = JOptionPane.showInputDialog(parentFrame, "Input proper username", "Invalid Username", JOptionPane.OK_OPTION);
-                    }
-                    
-                    newUsername = newUsername.trim();
-                    
-                    // Verify and update database
-                    UserDao.updateUsername(loginUser.getId(), newUsername);
-                    loginUser.setUsername(newUsername);
-                }
-                // Create session
-                SessionManager sessionManager = SessionManager.getInstance();
-                sessionManager.createSession(loginUser);
+            HomeForm homeForm = new HomeForm(false);
+            homeForm.setVisible(true);
+            if (UserDao.verifyCredentials(username, password)){
                 
-                // Open Home form
-                new HomeForm().setVisible(true);
-                parentFrame.dispose();
+                User loginUser = UserDao.getUserByEmailOrUsername(username);
+                if (loginUser != null) {
+                    if (loginUser.getUsername().isEmpty() || loginUser.getUsername() == null) {
+                        // Set new username
+                        String newUsername = JOptionPane.showInputDialog(parentFrame, "Input your username", "New Account", JOptionPane.OK_OPTION);
+                        while (!UserValidator.isValidUsername(newUsername)) {
+                            if (newUsername == null) return;
+                            System.out.println(newUsername);
+                            newUsername = JOptionPane.showInputDialog(parentFrame, "Input proper username", "Invalid Username", JOptionPane.OK_OPTION);
+                        }
+
+                        newUsername = newUsername.trim();
+
+                        // Verify and update database
+                        UserDao.updateUsername(loginUser.getId(), newUsername);
+                        loginUser.setUsername(newUsername);
+                    }
+                    // Create session
+                    SessionManager sessionManager = SessionManager.getInstance();
+                    sessionManager.createSession(loginUser);
+
+                    // Open Home form
+                    homeForm.startAnimation();
+                    parentFrame.dispose();
+                } else {
+                    homeForm.dispose();
+                }
+            } else {
+                homeForm.dispose();
+                JOptionPane.showMessageDialog(parentFrame, "Username or password is incorrect.",
+                        "Credential Error", JOptionPane.OK_OPTION);
             }
         } else {
-            // Validate email/username input
             if (UserValidator.isValidUsername(username) || UserValidator.isValidEmail(username)) {
                 Helper.setTextFieldBorder(txtUsername, "Email/Username", new Color(153,153,153));
-                
-                if (!UserDao.verifyCredentials(username, password)) {
-                    JOptionPane.showMessageDialog(parentFrame, "Username or password is incorrect.", "Credential Error", JOptionPane.OK_OPTION);
-                }
             } else {
                 Helper.setTextFieldBorder(txtUsername, "Email/Username", new Color(199,36,36));
             }

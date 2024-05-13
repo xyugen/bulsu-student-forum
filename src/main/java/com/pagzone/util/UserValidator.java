@@ -17,8 +17,7 @@ public class UserValidator {
     
     public static boolean verifyLogin(String username, String password) {
         if (!isValidUsername(username) && !isValidEmail(username)) return false;
-        if (!isValidPassword(password)) return false;
-        return UserDao.verifyCredentials(username, password);
+        return isValidPassword(password);
     }
 
     public static boolean verifySignup(String email, String password, String confirmPassword) {

@@ -38,12 +38,29 @@ public class HomeForm extends javax.swing.JFrame implements ChangePageListener {
     Feed pnlFeed;
     Write pnlWrite;
     
+    public HomeForm(boolean startAnimation) {
+        initComponents();
+        setBackground(new Color(1, 1, 1, 0.45f));
+        
+        if (startAnimation) initAnimation();
+        
+        applyMouseListener();
+    }
+    
     public HomeForm() {
         initComponents();
         setBackground(new Color(1, 1, 1, 0.45f));
         
         initAnimation();
         
+        applyMouseListener();
+    }
+    
+    public void startAnimation() {
+        initAnimation();
+    }
+    
+    private void applyMouseListener() {
         JFrame parentFrame = this;
         pnlHeader.addMouseListener(new MouseAdapter() {
             @Override

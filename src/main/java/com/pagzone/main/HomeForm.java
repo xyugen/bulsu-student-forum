@@ -5,6 +5,7 @@
 package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.pagzone.props.ChangePageListener;
 import com.pagzone.view.Header;
 import com.pagzone.view.page.Feed;
 import com.pagzone.view.page.Write;
@@ -29,7 +30,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
  *
  * @author Arias
  */
-public class HomeForm extends javax.swing.JFrame {
+public class HomeForm extends javax.swing.JFrame implements ChangePageListener {
     private Point initialClick;
     Sidebar pnlSidebar;
     javax.swing.JPanel pnlContent;
@@ -86,7 +87,7 @@ public class HomeForm extends javax.swing.JFrame {
     }
     
     private void init() {
-        pnlSidebar = new Sidebar();
+        pnlSidebar = new Sidebar(this);
         
         pnlContent = new javax.swing.JPanel();
         pnlContent.setLayout(new CardLayout());
@@ -173,6 +174,11 @@ public class HomeForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setPage(String page) {
+        CardLayout cardLayout = (CardLayout) pnlContent.getLayout();
+        cardLayout.show(pnlContent, page);
+    }
+    
     /**
      * @param args the command line arguments
      */

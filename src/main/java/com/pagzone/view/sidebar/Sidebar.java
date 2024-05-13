@@ -5,6 +5,7 @@
 package com.pagzone.view.sidebar;
 
 import com.pagzone.main.Main;
+import com.pagzone.props.ChangePageListener;
 import com.pagzone.service.SessionManager;
 import java.awt.Window;
 import javax.swing.JOptionPane;
@@ -17,9 +18,11 @@ import net.miginfocom.swing.MigLayout;
  */
 public class Sidebar extends javax.swing.JPanel {
     private MenuItem activeButton;
+    private ChangePageListener listener;
     
-    public Sidebar() {
+    public Sidebar(ChangePageListener listener) {
         initComponents();
+        this.listener = listener;
         this.setLayout(new MigLayout("wrap 1", "", "[][][][][grow][]"));
         
         applyActive(btnFeed);
@@ -44,6 +47,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnFeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chat_quote_icon_red_28.png"))); // NOI18N
         btnFeed.setBorderPainted(false);
         btnFeed.setMargin(null);
+        btnFeed.setName("feed"); // NOI18N
         btnFeed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
@@ -55,6 +59,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnWrite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil_icon_red_28.png"))); // NOI18N
         btnWrite.setBorderPainted(false);
         btnWrite.setMargin(null);
+        btnWrite.setName("write"); // NOI18N
         btnWrite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
@@ -66,6 +71,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_icon_red_28.png"))); // NOI18N
         btnUser.setBorderPainted(false);
         btnUser.setMargin(null);
+        btnUser.setName("user"); // NOI18N
         btnUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
@@ -77,6 +83,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bolt_icon_red_28.png"))); // NOI18N
         btnSettings.setBorderPainted(false);
         btnSettings.setMargin(null);
+        btnSettings.setName("settings"); // NOI18N
         btnSettings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
@@ -90,6 +97,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon_red_28.png"))); // NOI18N
         btnLogout.setBorderPainted(false);
         btnLogout.setMargin(null);
+        btnLogout.setName("logout"); // NOI18N
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutbtnActionPerformed(evt);
@@ -101,11 +109,12 @@ public class Sidebar extends javax.swing.JPanel {
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
         MenuItem selectedButton = (MenuItem) evt.getSource();
-    
+        
         if (selectedButton.isActive()) {
             return;
         }
-    
+        
+        listener.setPage(selectedButton.getName());
         applyActive(selectedButton);
     }//GEN-LAST:event_btnActionPerformed
 

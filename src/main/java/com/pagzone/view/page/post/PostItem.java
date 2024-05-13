@@ -6,6 +6,8 @@ package com.pagzone.view.page.post;
 
 import com.pagzone.model.Post;
 import com.pagzone.util.Helper;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -62,6 +64,12 @@ public final class PostItem extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(199, 36, 36));
         setForeground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
@@ -82,6 +90,12 @@ public final class PostItem extends javax.swing.JPanel {
         add(lblTimestamp);
         lblTimestamp.setBounds(80, 40, 70, 20);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        PostDialog postDialog = new PostDialog(parentFrame, true, post);
+        postDialog.setVisible(true);
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

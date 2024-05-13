@@ -73,7 +73,7 @@ public class CustomTitleBar extends javax.swing.JPanel {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            frame.dispose();
+            System.exit(0);
         }
     }//GEN-LAST:event_btnCloseActionPerformed
 

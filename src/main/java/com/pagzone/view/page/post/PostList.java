@@ -26,8 +26,8 @@ public class PostList extends javax.swing.JPanel {
         pnlPostList.removeAll();
         
         List<Post> posts = PostDao.getAllPosts();
-        for (Post post : posts) {
-            System.out.println(post.getTitle());
+        List<Post> reversedPosts = posts.reversed();
+        for (Post post : reversedPosts) {
             PostItem postItem = new PostItem(post);
             pnlPostList.add(postItem);
         }

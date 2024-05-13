@@ -36,7 +36,7 @@ public final class PostPage extends javax.swing.JPanel {
         lblTitle.setText(post.getTitle());
         lblUsername.setText(post.getUser().getUsername());
         lblTimestamp.setText(Helper.formatTimestamp(post.getTimestamp()));
-        lblBody.setText(post.getBody());
+        lblBody.setText("<html>" + post.getBody().replaceAll("\n", "<br />") + "</html>");
     }
     
     private void initLayout() {

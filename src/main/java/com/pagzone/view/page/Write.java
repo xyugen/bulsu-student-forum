@@ -4,6 +4,16 @@
  */
 package com.pagzone.view.page;
 
+import com.pagzone.component.Loader;
+import com.pagzone.dao.PostDao;
+import com.pagzone.model.Post;
+import com.pagzone.model.Session;
+import com.pagzone.service.SessionManager;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -17,10 +27,10 @@ public class Write extends javax.swing.JPanel {
      */
     public Write() {
         initComponents();
-        setLayout(new MigLayout("wrap 1, insets 8 8 8 8",
-                "[grow, fill][][]",
-                "[][fill, grow][20:30:30]"));
-        add(btnPost, "growy");
+        pnlContent.setLayout(new MigLayout("wrap 1, insets 8 8 8 8",
+                "[grow, fill]",
+                "[][][][][fill, grow][20:30:30]"));
+        pnlContent.add(btnPost, "growy");
     }
 
     /**
@@ -32,46 +42,132 @@ public class Write extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlLayered = new javax.swing.JLayeredPane();
+        pnlContent = new javax.swing.JPanel();
         lblPageTitle = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        txtTitle = new javax.swing.JTextField();
+        lblContent = new javax.swing.JLabel();
         spnlTextArea = new javax.swing.JScrollPane();
-        txtaPost = new javax.swing.JTextArea();
+        txtaContent = new javax.swing.JTextArea();
         btnPost = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
-        setLayout(null);
+        setLayout(new java.awt.BorderLayout());
+
+        pnlLayered.setLayout(new java.awt.BorderLayout());
+
+        pnlContent.setOpaque(false);
+        pnlContent.setLayout(null);
 
         lblPageTitle.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         lblPageTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblPageTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPageTitle.setText("Write a post");
-        add(lblPageTitle);
-        lblPageTitle.setBounds(150, 10, 100, 28);
+        pnlContent.add(lblPageTitle);
+        lblPageTitle.setBounds(60, 40, 250, 28);
 
-        txtaPost.setBackground(new java.awt.Color(255, 255, 255));
-        txtaPost.setColumns(20);
-        txtaPost.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtaPost.setForeground(new java.awt.Color(0, 0, 0));
-        txtaPost.setRows(5);
-        spnlTextArea.setViewportView(txtaPost);
+        lblTitle.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(0, 0, 0));
+        lblTitle.setLabelFor(txtTitle);
+        lblTitle.setText("Title");
+        lblTitle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        pnlContent.add(lblTitle);
+        lblTitle.setBounds(60, 70, 23, 19);
 
-        add(spnlTextArea);
-        spnlTextArea.setBounds(60, 120, 260, 110);
+        txtTitle.setBackground(new java.awt.Color(255, 255, 255));
+        txtTitle.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        txtTitle.setForeground(new java.awt.Color(0, 0, 0));
+        pnlContent.add(txtTitle);
+        txtTitle.setBounds(60, 90, 260, 30);
+
+        lblContent.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblContent.setForeground(new java.awt.Color(0, 0, 0));
+        lblContent.setLabelFor(txtaContent);
+        lblContent.setText("Content");
+        lblContent.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        pnlContent.add(lblContent);
+        lblContent.setBounds(60, 130, 80, 19);
+
+        txtaContent.setBackground(new java.awt.Color(255, 255, 255));
+        txtaContent.setColumns(20);
+        txtaContent.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtaContent.setForeground(new java.awt.Color(0, 0, 0));
+        txtaContent.setRows(5);
+        spnlTextArea.setViewportView(txtaContent);
+
+        pnlContent.add(spnlTextArea);
+        spnlTextArea.setBounds(60, 150, 260, 110);
 
         btnPost.setBackground(new java.awt.Color(199, 36, 36));
         btnPost.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         btnPost.setForeground(new java.awt.Color(255, 255, 255));
         btnPost.setText("Post");
         btnPost.setBorder(null);
-        add(btnPost);
+        btnPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostActionPerformed(evt);
+            }
+        });
+        pnlContent.add(btnPost);
         btnPost.setBounds(100, 290, 160, 22);
+
+        pnlLayered.add(pnlContent, java.awt.BorderLayout.CENTER);
+
+        add(pnlLayered, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostActionPerformed
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        Loader loader = new Loader();
+        pnlLayered.setLayer(loader, JLayeredPane.POPUP_LAYER);
+        pnlLayered.add(loader, BorderLayout.CENTER);
+        pnlLayered.validate();
+        pnlLayered.repaint();
+        
+        setEnableInputs(false);
+        createPost();
+        setEnableInputs(true);
+        
+        pnlLayered.remove(loader);
+        clearInputs();
+        
+        JOptionPane.showMessageDialog(parentFrame, "Your post has been successfully published.",
+                "Post Success", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnPostActionPerformed
+
+    private void createPost() {
+        SessionManager sessionManager = SessionManager.getInstance();
+        Post post = new Post();
+        
+        post.setTitle(txtTitle.getText().trim());
+        post.setUser(sessionManager.getCurrentUser());
+        post.setBody(txtaContent.getText());
+        
+        PostDao.createPost(post);
+    }
+    
+    private void clearInputs() {
+        txtTitle.setText("");
+        txtaContent.setText("");
+    }
+    
+    private void setEnableInputs(boolean value) {
+        txtTitle.setEnabled(value);
+        txtaContent.setEnabled(value);
+        btnPost.setEnabled(value);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPost;
+    private javax.swing.JLabel lblContent;
     private javax.swing.JLabel lblPageTitle;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel pnlContent;
+    private javax.swing.JLayeredPane pnlLayered;
     private javax.swing.JScrollPane spnlTextArea;
-    private javax.swing.JTextArea txtaPost;
+    private javax.swing.JTextField txtTitle;
+    private javax.swing.JTextArea txtaContent;
     // End of variables declaration//GEN-END:variables
 }

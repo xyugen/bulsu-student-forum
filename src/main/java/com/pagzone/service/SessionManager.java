@@ -26,15 +26,15 @@ public class SessionManager {
     }
     
     public void createSession(User user) {
-        currentSession = new Session(user.getUsername());
+        currentSession = new Session(user);
     }
     
     public boolean isUserLoggedIn() {
         return currentSession != null;
     }
     
-    public String getCurrentUsername() {
-        return currentSession.getUsername();
+    public User getCurrentUser() {
+        return currentSession.getUser();
     }
     
     public void endSession() {

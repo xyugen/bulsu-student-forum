@@ -11,15 +11,13 @@ import java.time.LocalDateTime;
  * @author Arias
  */
 public class Session {
-    private String username;
-    private LocalDateTime creationTime;
+    private User user;
     
-    public Session(String username) {
-        this.username = username;
-        this.creationTime = LocalDateTime.now();
+    public Session(User user) {
+        this.user = user;
     }
     
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 }

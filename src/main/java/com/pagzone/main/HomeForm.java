@@ -14,6 +14,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -134,6 +135,8 @@ public class HomeForm extends javax.swing.JFrame {
             @Override
             public void timingEvent(float fraction) {
                 pnlSidebar.setSize((int) (0 + 50 * fraction), getHeight());
+                pnlContent.setSize((int) (0 + getWidth() * fraction), getHeight());
+                pnlContent.setLocation((int) ((getWidth()) - (getWidth() - 50) * fraction), pnlContent.getLocation().y);
             }
         };
         

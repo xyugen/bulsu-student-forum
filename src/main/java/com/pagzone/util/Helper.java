@@ -9,6 +9,9 @@ import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Map;
 import javax.swing.JLabel;
@@ -44,5 +47,18 @@ public class Helper {
     
     public static void setTextFieldBorder(JTextField comp, String title, Color color) {
         comp.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), color));
+    }
+    
+    public static String formatTimestamp(Timestamp timestamp) {
+        // Convert Timestamp to LocalDateTime
+        LocalDateTime dateTime = timestamp.toLocalDateTime();
+
+        // Define the desired date-time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm:ss");
+
+        // Format LocalDateTime using the defined formatter
+        String formattedDateTime = dateTime.format(formatter);
+
+        return formattedDateTime;
     }
 }

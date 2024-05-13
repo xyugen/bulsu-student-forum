@@ -7,13 +7,21 @@ package com.pagzone.view.page;
 import com.pagzone.component.Loader;
 import com.pagzone.dao.PostDao;
 import com.pagzone.model.Post;
-import com.pagzone.model.Session;
 import com.pagzone.service.SessionManager;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -27,10 +35,28 @@ public class Write extends javax.swing.JPanel {
      */
     public Write() {
         initComponents();
-        pnlContent.setLayout(new MigLayout("wrap 1, insets 8 8 8 8",
+        pnlContent.setLayout(new MigLayout("wrap 1",
                 "[grow, fill]",
-                "[][][][][fill, grow][20:30:30]"));
+                "[][][][][fill, grow][][20:30:30]"));
         pnlContent.add(btnPost, "growy");
+        updateContentTextCountLabel();
+        
+        txtaContent.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateContentTextCountLabel();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateContentTextCountLabel();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+        });
+        
+        updateTimestampLabel();
     }
 
     /**
@@ -46,10 +72,13 @@ public class Write extends javax.swing.JPanel {
         pnlContent = new javax.swing.JPanel();
         lblPageTitle = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
-        txtTitle = new javax.swing.JTextField();
+        txtTitle = new com.pagzone.component.LimitedTextField();
         lblContent = new javax.swing.JLabel();
         spnlTextArea = new javax.swing.JScrollPane();
-        txtaContent = new javax.swing.JTextArea();
+        txtaContent = new com.pagzone.component.LimitedTextArea();
+        pnlTextDetails = new javax.swing.JPanel();
+        lblTimestamp = new javax.swing.JLabel();
+        lblContentTextCount = new javax.swing.JLabel();
         btnPost = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -77,8 +106,10 @@ public class Write extends javax.swing.JPanel {
         lblTitle.setBounds(60, 70, 23, 19);
 
         txtTitle.setBackground(new java.awt.Color(255, 255, 255));
-        txtTitle.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         txtTitle.setForeground(new java.awt.Color(0, 0, 0));
+        txtTitle.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtTitle.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtTitle.setMaxLength(50);
         pnlContent.add(txtTitle);
         txtTitle.setBounds(60, 90, 260, 30);
 
@@ -90,15 +121,38 @@ public class Write extends javax.swing.JPanel {
         pnlContent.add(lblContent);
         lblContent.setBounds(60, 130, 80, 19);
 
+        spnlTextArea.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spnlTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         txtaContent.setBackground(new java.awt.Color(255, 255, 255));
         txtaContent.setColumns(20);
-        txtaContent.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         txtaContent.setForeground(new java.awt.Color(0, 0, 0));
+        txtaContent.setLineWrap(true);
         txtaContent.setRows(5);
+        txtaContent.setWrapStyleWord(true);
+        txtaContent.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtaContent.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtaContent.setMaxLength(500);
         spnlTextArea.setViewportView(txtaContent);
 
         pnlContent.add(spnlTextArea);
         spnlTextArea.setBounds(60, 150, 260, 110);
+
+        pnlTextDetails.setOpaque(false);
+        pnlTextDetails.setLayout(new java.awt.GridLayout(1, 2));
+
+        lblTimestamp.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblTimestamp.setForeground(new java.awt.Color(102, 102, 102));
+        lblTimestamp.setText("test");
+        pnlTextDetails.add(lblTimestamp);
+
+        lblContentTextCount.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblContentTextCount.setForeground(new java.awt.Color(102, 102, 102));
+        lblContentTextCount.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        pnlTextDetails.add(lblContentTextCount);
+
+        pnlContent.add(pnlTextDetails);
+        pnlTextDetails.setBounds(30, 270, 260, 20);
 
         btnPost.setBackground(new java.awt.Color(199, 36, 36));
         btnPost.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
@@ -119,7 +173,6 @@ public class Write extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostActionPerformed
-        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         Loader loader = new Loader();
         pnlLayered.setLayer(loader, JLayeredPane.POPUP_LAYER);
         pnlLayered.add(loader, BorderLayout.CENTER);
@@ -131,21 +184,68 @@ public class Write extends javax.swing.JPanel {
         setEnableInputs(true);
         
         pnlLayered.remove(loader);
-        clearInputs();
-        
-        JOptionPane.showMessageDialog(parentFrame, "Your post has been successfully published.",
-                "Post Success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnPostActionPerformed
 
+    private void updateTimestampLabel() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+        String formattedDate = dateFormat.format(new Date());
+        lblTimestamp.setText(formattedDate);
+        
+        startTimer();
+    }
+
+    private void startTimer() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTimestampLabel();
+            }
+        });
+        timer.start();
+    }
+    
+    private void updateContentTextCountLabel() {
+        lblContentTextCount.setText(getContentTextCount() + "/500");
+        
+        if (getContentTextCount() >= 500) {
+            lblContentTextCount.setForeground(new Color(199,36,36));
+        } else {
+            lblContentTextCount.setForeground(new Color(102,102,102));
+        }
+    }
+    
+    private int getContentTextCount() {
+        return txtaContent.getText().length();
+    }
+    
     private void createPost() {
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         SessionManager sessionManager = SessionManager.getInstance();
-        Post post = new Post();
+        String title = txtTitle.getText().trim();
+        String content = txtaContent.getText().trim();
         
-        post.setTitle(txtTitle.getText().trim());
-        post.setUser(sessionManager.getCurrentUser());
-        post.setBody(txtaContent.getText());
-        
-        PostDao.createPost(post);
+        if (title.length() > 0 && content.length() > 0) {
+            try {
+                Post post = new Post();
+                post.setTitle(title);
+                post.setUser(sessionManager.getCurrentUser());
+                post.setBody(content);
+
+                PostDao.createPost(post);
+                clearInputs();
+                JOptionPane.showMessageDialog(parentFrame, "Your post has been successfully published.",
+                    "Post Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(parentFrame, "You must log in to be able to post.",
+                        "User is not logged in", JOptionPane.ERROR_MESSAGE);
+            } catch (HeadlessException ex) {
+                JOptionPane.showMessageDialog(parentFrame, ex.getMessage(),
+                        "An error has occured", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(parentFrame, "Both fields are required!",
+                    "Missing Fields", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void clearInputs() {
@@ -162,12 +262,15 @@ public class Write extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPost;
     private javax.swing.JLabel lblContent;
+    private javax.swing.JLabel lblContentTextCount;
     private javax.swing.JLabel lblPageTitle;
+    private javax.swing.JLabel lblTimestamp;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlContent;
     private javax.swing.JLayeredPane pnlLayered;
+    private javax.swing.JPanel pnlTextDetails;
     private javax.swing.JScrollPane spnlTextArea;
-    private javax.swing.JTextField txtTitle;
-    private javax.swing.JTextArea txtaContent;
+    private com.pagzone.component.LimitedTextField txtTitle;
+    private com.pagzone.component.LimitedTextArea txtaContent;
     // End of variables declaration//GEN-END:variables
 }

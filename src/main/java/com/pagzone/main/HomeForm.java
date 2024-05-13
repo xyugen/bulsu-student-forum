@@ -6,6 +6,7 @@ package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.view.Header;
+import com.pagzone.view.page.Feed;
 import com.pagzone.view.page.Write;
 import com.pagzone.view.sidebar.Sidebar;
 import java.awt.BorderLayout;
@@ -31,6 +32,8 @@ public class HomeForm extends javax.swing.JFrame {
     private Point initialClick;
     Sidebar pnlSidebar;
     javax.swing.JPanel pnlContent;
+    
+    Feed pnlFeed;
     Write pnlWrite;
     
     public HomeForm() {
@@ -88,8 +91,10 @@ public class HomeForm extends javax.swing.JFrame {
         pnlContent.setLayout(new CardLayout());
         pnlContent.setOpaque(false);
         
+        pnlFeed = new Feed();
         pnlWrite = new Write();
-        pnlContent.add(pnlWrite);
+        pnlContent.add(pnlFeed, "feed");
+        pnlContent.add(pnlWrite, "write");
     }
     
     private void initAnimation() {

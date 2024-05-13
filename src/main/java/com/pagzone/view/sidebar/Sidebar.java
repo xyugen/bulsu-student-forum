@@ -21,6 +21,8 @@ public class Sidebar extends javax.swing.JPanel {
     public Sidebar() {
         initComponents();
         this.setLayout(new MigLayout("wrap 1", "", "[][][][][grow][]"));
+        
+        applyActive(btnFeed);
     }
     
     @SuppressWarnings("unchecked")
@@ -104,14 +106,7 @@ public class Sidebar extends javax.swing.JPanel {
             return;
         }
     
-        if (activeButton != null) {
-            activeButton.setIsActive(false);
-            activeButton.setContentAreaFilled(false);
-        }
-
-        activeButton = selectedButton;
-        activeButton.setIsActive(true);
-        activeButton.setContentAreaFilled(true);
+        applyActive(selectedButton);
     }//GEN-LAST:event_btnActionPerformed
 
     private void btnLogoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutbtnActionPerformed
@@ -128,6 +123,16 @@ public class Sidebar extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnLogoutbtnActionPerformed
 
+    private void applyActive(MenuItem button) {
+        if (activeButton != null) {
+            activeButton.setIsActive(false);
+            activeButton.setContentAreaFilled(false);
+        }
+
+        activeButton = button;
+        activeButton.setIsActive(true);
+        activeButton.setContentAreaFilled(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.pagzone.view.sidebar.MenuItem btnFeed;

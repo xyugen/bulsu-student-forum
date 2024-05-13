@@ -6,8 +6,10 @@ package com.pagzone.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.view.Header;
+import com.pagzone.view.page.Write;
 import com.pagzone.view.sidebar.Sidebar;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
@@ -28,6 +30,8 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 public class HomeForm extends javax.swing.JFrame {
     private Point initialClick;
     Sidebar pnlSidebar;
+    javax.swing.JPanel pnlContent;
+    Write pnlWrite;
     
     public HomeForm() {
         initComponents();
@@ -79,6 +83,13 @@ public class HomeForm extends javax.swing.JFrame {
     
     private void init() {
         pnlSidebar = new Sidebar();
+        
+        pnlContent = new javax.swing.JPanel();
+        pnlContent.setLayout(new CardLayout());
+        pnlContent.setOpaque(false);
+        
+        pnlWrite = new Write();
+        pnlContent.add(pnlWrite);
     }
     
     private void initAnimation() {
@@ -94,6 +105,7 @@ public class HomeForm extends javax.swing.JFrame {
                 pnlSidebar.setVisible(true);
                 initSidebarAnimation();
                 pnlHome.add(pnlSidebar, BorderLayout.WEST);
+                pnlHome.add(pnlContent, BorderLayout.CENTER);
                 pnlHome.remove(pnlLoadingScreen);
                 pnlHome.revalidate();
                 pnlHome.repaint();
@@ -142,6 +154,7 @@ public class HomeForm extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlHome.setOpaque(false);
         pnlHome.setLayout(new java.awt.BorderLayout());
         pnlHome.add(pnlLoadingScreen, java.awt.BorderLayout.CENTER);
         pnlHome.add(pnlHeader, java.awt.BorderLayout.PAGE_START);

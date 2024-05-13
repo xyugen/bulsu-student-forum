@@ -1,6 +1,9 @@
 package com.pagzone.component;
 
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import org.jdesktop.animation.timing.Animator;
@@ -85,25 +88,33 @@ public class CustomTitleBar extends javax.swing.JPanel {
         int defaultWidth = frame.getWidth(), defaultHeight = frame.getHeight();
         btnMinimize.setEnabled(false);
         Animator animator = new Animator(200, new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                int frameHeight = frame.getHeight();
+                int minHeight = 25; // Minimum height for the frame
+
+                // Calculate the new height of the frame based on the animation fraction
+                int newHeight = (int) (frameHeight - (frameHeight - minHeight) * fraction);
+
+                // Set the frame's size
+                frame.setSize(frame.getWidth(), newHeight);
+            }
+
+            @Override
+            public void end() {
+                // Delay the minimization until after the animation has completed
+                Timer timer = new Timer(100, new ActionListener() {
                     @Override
-                    public void timingEvent(float fraction) {
-                        int frameHeight = frame.getHeight();
-                        int minHeight = 25; // Minimum height for the frame
-
-                        // Calculate the new height of the frame based on the animation fraction
-                        int newHeight = (int) (frameHeight - (frameHeight - minHeight) * fraction);
-
-                        // Set the frame's size
-                        frame.setSize(frame.getWidth(), newHeight);
-                    }
-
-                    @Override
-                    public void end() {
+                    public void actionPerformed(ActionEvent e) {
                         frame.setState(Frame.ICONIFIED);
                         frame.setSize(defaultWidth, defaultHeight);
                         btnMinimize.setEnabled(true);
                     }
                 });
+                timer.setRepeats(false); // Only fire the action once
+                timer.start();
+            }
+        });
 
         animator.start();
     }

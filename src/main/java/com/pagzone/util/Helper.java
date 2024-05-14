@@ -6,7 +6,13 @@ package com.pagzone.util;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.font.TextAttribute;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
@@ -16,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -62,5 +70,24 @@ public class Helper {
         String formattedDateTime = dateTime.format(formatter);
 
         return formattedDateTime;
+    }
+    
+    public static ImageIcon resizeImage(Image image, int width, int height) {
+        Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        BufferedImage resizedBufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resizedBufferedImage.createGraphics();
+
+        g2d.drawImage(resizedImage, 0, 0, null);
+        g2d.dispose();
+
+        ImageIcon icon = new ImageIcon(resizedBufferedImage);
+
+        return icon;
+    }
+    
+    public static BufferedImage convertToImage(byte[] imgBytes) throws IOException {
+        InputStream in = new ByteArrayInputStream(imgBytes);
+        return ImageIO.read(in);
     }
 }

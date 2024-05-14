@@ -235,8 +235,8 @@ public class Login extends javax.swing.JPanel {
                         // Verify and update database
                         UserDao.updateUsername(loginUser.getId(), newUsername);
                         loginUser.setUsername(newUsername);
-                        System.out.println("I AM STUDENT ID: " + loginUser.getStudent().getStudId());
                     }
+                    System.out.println("I AM STUDENT ID: " + loginUser.getStudent().getStudId());
                     // Create session
                     SessionManager sessionManager = SessionManager.getInstance();
                     sessionManager.createSession(loginUser);

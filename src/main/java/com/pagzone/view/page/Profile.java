@@ -6,6 +6,11 @@ package com.pagzone.view.page;
 
 import com.pagzone.dao.CourseDao;
 import com.pagzone.model.Course;
+import com.pagzone.model.Student;
+import com.pagzone.model.User;
+import com.pagzone.service.SessionManager;
+import com.pagzone.util.Helper;
+import static com.pagzone.util.Helper.resizeImage;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -27,13 +32,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Arias
  */
 public class Profile extends javax.swing.JPanel {
-
+    SessionManager sessionManager;
+    
     /**
      * Creates new form Profile
      */
     public Profile() {
         initComponents();
         populateCoursesComboBox();
+        try {
+            populateStudentData();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     private void populateCoursesComboBox() {
@@ -47,6 +58,35 @@ public class Profile extends javax.swing.JPanel {
         cmbCourse.setModel(new DefaultComboBoxModel(courseNames));
     }
 
+    private void populateStudentData() throws IOException {
+        sessionManager = SessionManager.getInstance();
+        User currentUser = sessionManager.getCurrentUser();
+        Student currentStudent = currentUser.getStudent();
+        
+        txtStudentId.setText(String.valueOf(currentStudent.getStudId()));
+        txtFirstName.setText(currentStudent.getFirstName() == null ? "" : currentStudent.getFirstName());
+        txtMiddleName.setText(currentStudent.getMiddleName()== null ? "" : currentStudent.getMiddleName());
+        txtLastName.setText(currentStudent.getLastName() == null ? "" : currentStudent.getLastName());
+        cmbYear.setSelectedItem(currentStudent.getYear());
+        cmbCourse.setSelectedItem(currentStudent.getCourse() == null ? cmbCourse.getItemAt(0) : currentStudent.getCourse());
+        
+        if (currentStudent.getProfilePicture() != null) {
+            System.out.println("TEST1");
+            try {
+                Image profilePic = Helper.convertToImage(currentStudent.getProfilePicture());
+                ImageIcon profileIcon = resizeImage(profilePic, 100, 100);
+                lblProfilePicture.setIcon(profileIcon);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("TEST2");
+            Image profilePic = ImageIO.read(getClass().getResource("/avatar_placeholder.png"));
+            ImageIcon profileIcon = resizeImage(profilePic, 100, 100);
+            lblProfilePicture.setIcon(profileIcon);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,6 +129,7 @@ public class Profile extends javax.swing.JPanel {
         lblStudentId.setText("Student ID");
 
         txtStudentId.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtStudentId.setEnabled(false);
 
         lblLastName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblLastName.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,16 +277,7 @@ public class Profile extends javax.swing.JPanel {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 Image image = ImageIO.read(selectedFile);
-                Image resizedImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                
-                BufferedImage resizedBufferedImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-                Graphics2D g2d = resizedBufferedImage.createGraphics();
-
-                g2d.drawImage(resizedImage, 0, 0, null);
-                g2d.dispose();
-                
-                ImageIcon icon = new ImageIcon(resizedBufferedImage);
-
+                ImageIcon icon = Helper.resizeImage(image, 100, 100);
                 lblProfilePicture.setIcon(icon);
             } catch (IOException ex) {
                 ex.printStackTrace();

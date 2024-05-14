@@ -39,7 +39,7 @@ public class StudentDao {
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
               PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, studId);
-            stmt.setInt(1, studId);
+            stmt.setInt(2, studId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Student student = new Student();

@@ -180,8 +180,7 @@ public class UserDao {
         user.setIsAdmin(rs.getBoolean("is_admin"));
         user.setCreationDate(rs.getTimestamp("creation_time"));
         
-        Student student = new Student();
-        //student.setId(rs.getInt("student_id"));
+        Student student = StudentDao.getStudent(rs.getInt("stud_id"));
         user.setStudent(student);
         
         user.setProfilePicture(rs.getBytes("profile_picture"));

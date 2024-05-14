@@ -25,7 +25,6 @@ public class Main extends javax.swing.JFrame implements com.pagzone.props.CardLa
     public Main() {
         initComponents();
         initSplashScreen();
-        
         JFrame parentFrame = this;
         parentFrame.addMouseListener(new MouseAdapter() {
             @Override

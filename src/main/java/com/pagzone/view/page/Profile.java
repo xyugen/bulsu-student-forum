@@ -4,12 +4,17 @@
  */
 package com.pagzone.view.page;
 
+import com.pagzone.dao.CourseDao;
+import com.pagzone.model.Course;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -28,6 +33,18 @@ public class Profile extends javax.swing.JPanel {
      */
     public Profile() {
         initComponents();
+        populateCoursesComboBox();
+    }
+    
+    private void populateCoursesComboBox() {
+        List<Course> courses = CourseDao.getAllCourses();
+        String[] courseNames = new String[courses.size()];
+        
+        for (Course course : courses) {
+            courseNames[courses.indexOf(course)] = course.getCourseName();
+        }
+        
+        cmbCourse.setModel(new DefaultComboBoxModel(courseNames));
     }
 
     /**
@@ -72,7 +89,6 @@ public class Profile extends javax.swing.JPanel {
         lblStudentId.setText("Student ID");
 
         txtStudentId.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtStudentId.setText("jTextField1");
 
         lblLastName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblLastName.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,7 +96,6 @@ public class Profile extends javax.swing.JPanel {
         lblLastName.setText("Last Name");
 
         txtLastName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtLastName.setText("jTextField1");
 
         lblFirstName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,7 +103,6 @@ public class Profile extends javax.swing.JPanel {
         lblFirstName.setText("First Name");
 
         txtFirstName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtFirstName.setText("jTextField1");
 
         lblMiddleName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblMiddleName.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,7 +110,6 @@ public class Profile extends javax.swing.JPanel {
         lblMiddleName.setText("Middle Name");
 
         txtMiddleName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtMiddleName.setText("jTextField1");
 
         lblYear.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblYear.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,7 +125,6 @@ public class Profile extends javax.swing.JPanel {
         lblCourse.setText("Course");
 
         cmbCourse.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        cmbCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BSIT", "BIT", "HM" }));
 
         pnlProfileContainer.setBackground(new java.awt.Color(255, 255, 255));
         pnlProfileContainer.setLayout(new java.awt.BorderLayout());

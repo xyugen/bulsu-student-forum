@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class PostDao {
     // Create (Insert) operation
-    public static void createPost(Post post) {
+    public static boolean createPost(Post post) {
         String sql = "INSERT INTO posts (user_id, title, body, timestamp) VALUES (?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
@@ -29,9 +29,12 @@ public class PostDao {
             stmt.setTimestamp(4, post.getTimestamp());
             
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        return false;
     }
     
     // Read (Select) operation - Retrieve all posts

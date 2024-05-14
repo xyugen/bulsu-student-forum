@@ -16,8 +16,9 @@ public class Student {
     private String lastName;
     private int year;
     private String course;
+    private byte[] profilePicture;
 
-    public Student(int id, int studId, String firstName, String middleName, String lastName, int year, String course) {
+    public Student(int id, int studId, String firstName, String middleName, String lastName, int year, String course, byte[] profilePicture) {
         this.id = id;
         this.studId = studId;
         this.firstName = firstName;
@@ -28,20 +29,28 @@ public class Student {
 
     public Student() { }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
+    
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
 
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+    
     public String getMiddleName() {
         return middleName;
     }
 
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getStudId() {

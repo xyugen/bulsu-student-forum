@@ -4,6 +4,7 @@
  */
 package com.pagzone.view;
 
+import com.pagzone.dao.DatabaseConnection;
 import com.pagzone.dao.UserDao;
 import com.pagzone.main.HomeForm;
 import com.pagzone.props.CardLayoutChangeListener;
@@ -215,8 +216,8 @@ public class Login extends javax.swing.JPanel {
             
             HomeForm homeForm = new HomeForm(false);
             homeForm.setVisible(true);
+            
             if (UserDao.verifyCredentials(username, password)){
-                
                 User loginUser = UserDao.getUserByEmailOrUsername(username);
                 if (loginUser != null) {
                     if (loginUser.getUsername().isEmpty() || loginUser.getUsername() == null) {
@@ -247,7 +248,7 @@ public class Login extends javax.swing.JPanel {
             } else {
                 homeForm.dispose();
                 JOptionPane.showMessageDialog(parentFrame, "Username or password is incorrect.",
-                        "Credential Error", JOptionPane.OK_OPTION);
+                        "Credential Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             if (UserValidator.isValidUsername(username) || UserValidator.isValidEmail(username)) {

@@ -4,20 +4,10 @@
  */
 package com.pagzone.model;
 
-import java.time.LocalDateTime;
-
 /**
  *
  * @author Arias
  */
-public class Session {
-    private User user;
-    
-    public Session(User user) {
-        this.user = user;
-    }
-    
-    public User getUser() {
-        return user;
-    }
+public interface CardLayoutChangeListener {
+    void changeCardLayout(String cardName);
 }

@@ -12,11 +12,12 @@ public class Student {
     private int id;
     private int studId;
     private String firstName;
+    private String middleName;
     private String lastName;
     private int year;
     private String course;
 
-    public Student(int id, int studId, String firstName, String lastName, int year, String course) {
+    public Student(int id, int studId, String firstName, String middleName, String lastName, int year, String course) {
         this.id = id;
         this.studId = studId;
         this.firstName = firstName;
@@ -29,6 +30,14 @@ public class Student {
 
     public int getId() {
         return id;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public void setId(int id) {

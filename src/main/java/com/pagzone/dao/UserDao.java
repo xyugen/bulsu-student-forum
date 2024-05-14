@@ -155,6 +155,8 @@ public class UserDao {
             e.printStackTrace();
         }
         
+        System.out.println("TEST");
+        
         return false;
     }
     

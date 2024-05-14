@@ -45,6 +45,7 @@ public class Sidebar extends javax.swing.JPanel {
         setLayout(null);
 
         btnFeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chat_quote_icon_red_28.png"))); // NOI18N
+        btnFeed.setToolTipText("Feed");
         btnFeed.setBorderPainted(false);
         btnFeed.setMargin(null);
         btnFeed.setName("feed"); // NOI18N
@@ -57,6 +58,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnFeed.setBounds(0, 0, 60, 50);
 
         btnWrite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil_icon_red_28.png"))); // NOI18N
+        btnWrite.setToolTipText("Create post");
         btnWrite.setBorderPainted(false);
         btnWrite.setMargin(null);
         btnWrite.setName("write"); // NOI18N
@@ -69,9 +71,10 @@ public class Sidebar extends javax.swing.JPanel {
         btnWrite.setBounds(0, 40, 60, 50);
 
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_icon_red_28.png"))); // NOI18N
+        btnUser.setToolTipText("Student profile");
         btnUser.setBorderPainted(false);
         btnUser.setMargin(null);
-        btnUser.setName("user"); // NOI18N
+        btnUser.setName("profile"); // NOI18N
         btnUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
@@ -81,6 +84,7 @@ public class Sidebar extends javax.swing.JPanel {
         btnUser.setBounds(0, 90, 60, 50);
 
         btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bolt_icon_red_28.png"))); // NOI18N
+        btnSettings.setToolTipText("User settings");
         btnSettings.setBorderPainted(false);
         btnSettings.setMargin(null);
         btnSettings.setName("settings"); // NOI18N
@@ -95,6 +99,7 @@ public class Sidebar extends javax.swing.JPanel {
         filler1.setBounds(30, 220, 0, 0);
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon_red_28.png"))); // NOI18N
+        btnLogout.setToolTipText("Log out");
         btnLogout.setBorderPainted(false);
         btnLogout.setMargin(null);
         btnLogout.setName("logout"); // NOI18N

@@ -6,16 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDao {
-    private Connection conn;
-
-    public StudentDao(Connection conn) {
-        this.conn = conn;
-    }
-
     // Create
-    public void addStudent(Student student) throws SQLException {
+    public static int insertStudent(Student student) throws SQLException {
         String sql = "INSERT INTO students (stud_id, first_name, middle_name, last_name, year, course, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, student.getStudId());
             stmt.setString(2, student.getFirstName());
             stmt.setString(3, student.getMiddleName());
@@ -23,13 +18,26 @@ public class StudentDao {
             stmt.setInt(5, student.getYear());
             stmt.setString(6, student.getCourse());
             stmt.setBytes(7, student.getProfilePicture());
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+            
+            if (rowsAffected == 0) {
+                throw new SQLException("Creating student failed, no rows affected.");
+            }
+            
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating student failed, no ID obtained.");
+                }
+            }
         }
     }
     
-    public Student getStudent(int studId) throws SQLException {
+    public static Student getStudent(int studId) throws SQLException {
         String sql = "SELECT * FROM students WHERE id = ? OR stud_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, studId);
             stmt.setInt(1, studId);
             ResultSet rs = stmt.executeQuery();
@@ -51,9 +59,10 @@ public class StudentDao {
     }
 
     // Update
-    public void updateStudent(Student student) throws SQLException {
+    public static void updateStudent(Student student) throws SQLException {
         String sql = "UPDATE students SET first_name = ?, middle_name = ?, last_name = ?, year = ?, course = ?, profile_picture = ? WHERE id = ? OR stud_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, student.getFirstName());
             stmt.setString(2, student.getMiddleName());
             stmt.setString(3, student.getLastName());
@@ -67,9 +76,10 @@ public class StudentDao {
     }
 
     // Delete
-    public void deleteStudent(int studId) throws SQLException {
+    public static void deleteStudent(int studId) throws SQLException {
         String sql = "DELETE FROM students WHERE id = ? OR stud_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, studId);
             stmt.setInt(2, studId);
             stmt.executeUpdate();
@@ -77,10 +87,11 @@ public class StudentDao {
     }
 
     // Get all students
-    public List<Student> getAllStudents() throws SQLException {
+    public static List<Student> getAllStudents() throws SQLException {
         List<Student> students = new ArrayList<>();
         String sql = "SELECT * FROM students";
-        try (Statement stmt = conn.createStatement()) {
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Student student = new Student();

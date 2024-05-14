@@ -11,34 +11,46 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author alex
  */
 public class UserDao {
-    public static boolean insertUser(String email, String password) {
-        return insertUser(email, password, "");
+    public static int insertUser(String email, String password) throws SQLException{
+        return insertUser(-1, email, password, "");
     }
     
-    public static boolean insertUser(String email, String password, String username) {
+    public static int insertUser(int studId, String email, String password) throws SQLException {
+        return insertUser(studId, email, password, "");
+    }
+    
+    public static int insertUser(int studId, String email, String password, String username) throws SQLException {
         String hashedPassword = Helper.hashPassword(password);
-        String sql = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (stud_id, email, password, username) VALUES (?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, email);
-            stmt.setString(2, hashedPassword);
-            stmt.setString(3, username);
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, studId);
+            stmt.setString(2, email);
+            stmt.setString(3, hashedPassword);
+            stmt.setString(4, username);
             
             int rowsAffected = stmt.executeUpdate();
             
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+            if (rowsAffected == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+            
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         }
-        
-        return false; // Error occurred or user not inserted
     }
     
     public static boolean updateUsername(int id, String username) {

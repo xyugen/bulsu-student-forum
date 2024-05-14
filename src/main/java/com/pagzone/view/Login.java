@@ -5,6 +5,7 @@
 package com.pagzone.view;
 
 import com.pagzone.dao.DatabaseConnection;
+import com.pagzone.dao.StudentDao;
 import com.pagzone.dao.UserDao;
 import com.pagzone.main.HomeForm;
 import com.pagzone.props.CardLayoutChangeListener;
@@ -234,6 +235,7 @@ public class Login extends javax.swing.JPanel {
                         // Verify and update database
                         UserDao.updateUsername(loginUser.getId(), newUsername);
                         loginUser.setUsername(newUsername);
+                        System.out.println("I AM STUDENT ID: " + loginUser.getStudent().getStudId());
                     }
                     // Create session
                     SessionManager sessionManager = SessionManager.getInstance();

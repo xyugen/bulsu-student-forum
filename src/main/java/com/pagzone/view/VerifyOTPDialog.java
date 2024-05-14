@@ -5,9 +5,16 @@
 package com.pagzone.view;
 
 import com.pagzone.dao.OTPDao;
+import com.pagzone.dao.StudentDao;
 import com.pagzone.dao.UserDao;
+import com.pagzone.model.Student;
 import com.pagzone.util.Helper;
+import com.sanctionco.jmail.Email;
+import com.sanctionco.jmail.JMail;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -329,7 +336,23 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
         
         boolean isValidOTP = OTPDao.verifyOTP(email, otpString);
         if (isValidOTP) {
-            UserDao.insertUser(email, password);
+            Email parsedEmail = JMail.tryParse(email).orElseThrow(() ->
+                    new IllegalArgumentException("Invalid email address")
+            );
+            try {
+                Student student = new Student();
+                student.setStudId(Integer.parseInt(parsedEmail.localPart()));
+                int insertedStudentId = StudentDao.insertStudent(student);
+                
+                UserDao.insertUser(insertedStudentId, email, password);
+            } catch (SQLException ex) {
+                Logger.getLogger(VerifyOTPDialog.class.getName()).log(Level.SEVERE, null, ex);
+                
+                JOptionPane.showMessageDialog(rootPane, "An error has occured an user cannot be created.",
+                        "Sign Up Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             JOptionPane.showMessageDialog(rootPane, "User account has been successfully created. Log in to your new account.",
                     "Sign Up Success", JOptionPane.OK_OPTION);
             this.dispose();

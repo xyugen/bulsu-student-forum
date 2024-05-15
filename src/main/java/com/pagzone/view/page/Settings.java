@@ -38,6 +38,8 @@ public class Settings extends javax.swing.JPanel {
     private void populateDataFields() {
         txtEmail.setText(currentUser.getEmail());
         txtUsername.setText(currentUser.getUsername());
+        
+        lblAccountTypeValue.setText(currentUser.isIsAdmin() ? "Administrator" : "Regular");
     }
     
     /**
@@ -54,7 +56,8 @@ public class Settings extends javax.swing.JPanel {
         pnlUserSettings = new javax.swing.JPanel();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        chkChangePassword = new javax.swing.JCheckBox();
+        lblAccountType = new javax.swing.JLabel();
+        lblAccountTypeValue = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         lblOldPassword = new javax.swing.JLabel();
@@ -64,6 +67,7 @@ public class Settings extends javax.swing.JPanel {
         ptxtNewPassword = new javax.swing.JPasswordField();
         lblConfirmNewPassword = new javax.swing.JLabel();
         ptxtConfirmNewPassword = new javax.swing.JPasswordField();
+        chkChangePassword = new javax.swing.JCheckBox();
         btnSave = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
@@ -93,15 +97,12 @@ public class Settings extends javax.swing.JPanel {
         txtEmail.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(0, 0, 0));
 
-        chkChangePassword.setBackground(new java.awt.Color(255, 255, 255));
-        chkChangePassword.setFont(new java.awt.Font("Poppins", 0, 10)); // NOI18N
-        chkChangePassword.setForeground(new java.awt.Color(102, 102, 102));
-        chkChangePassword.setText("Change password");
-        chkChangePassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkChangePasswordActionPerformed(evt);
-            }
-        });
+        lblAccountType.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblAccountType.setForeground(new java.awt.Color(0, 0, 0));
+        lblAccountType.setText("Account Type");
+
+        lblAccountTypeValue.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        lblAccountTypeValue.setForeground(new java.awt.Color(0, 0, 0));
 
         lblUsername.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(0, 0, 0));
@@ -151,6 +152,16 @@ public class Settings extends javax.swing.JPanel {
         ptxtConfirmNewPassword.setForeground(new java.awt.Color(0, 0, 0));
         ptxtConfirmNewPassword.setEnabled(false);
 
+        chkChangePassword.setBackground(new java.awt.Color(255, 255, 255));
+        chkChangePassword.setFont(new java.awt.Font("Poppins", 0, 10)); // NOI18N
+        chkChangePassword.setForeground(new java.awt.Color(102, 102, 102));
+        chkChangePassword.setText("Change password");
+        chkChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkChangePasswordActionPerformed(evt);
+            }
+        });
+
         btnSave.setBackground(new java.awt.Color(199, 36, 36));
         btnSave.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,24 +193,28 @@ public class Settings extends javax.swing.JPanel {
                 .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(chkChangePassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ptxtNewPassword)
                             .addComponent(ptxtConfirmNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                             .addComponent(lblNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblConfirmNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblConfirmNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAccountTypeValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAccountType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(186, 186, 186))
         );
         pnlUserSettingsLayout.setVerticalGroup(
             pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlUserSettingsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblEmail)
+                .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(lblAccountType))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkChangePassword))
-                .addGap(8, 8, 8)
+                    .addComponent(lblAccountTypeValue))
+                .addGap(9, 9, 9)
                 .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlUserSettingsLayout.createSequentialGroup()
                         .addComponent(lblUsername)
@@ -210,21 +225,21 @@ public class Settings extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ptxtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkOldPassword))
+                        .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkOldPassword)
+                            .addComponent(chkChangePassword)))
                     .addGroup(pnlUserSettingsLayout.createSequentialGroup()
-                        .addGroup(pnlUserSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlUserSettingsLayout.createSequentialGroup()
-                                .addComponent(lblNewPassword)
-                                .addGap(38, 38, 38)
-                                .addComponent(lblConfirmNewPassword))
-                            .addGroup(pnlUserSettingsLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(ptxtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(ptxtConfirmNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addComponent(lblNewPassword)
+                        .addGap(38, 38, 38)
+                        .addComponent(lblConfirmNewPassword))
+                    .addGroup(pnlUserSettingsLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(ptxtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(ptxtConfirmNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         tpnlSettings.addTab("User Settings", pnlUserSettings);
@@ -345,6 +360,8 @@ public class Settings extends javax.swing.JPanel {
     private javax.swing.JCheckBox chkChangePassword;
     private javax.swing.JCheckBox chkOldPassword;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAccountType;
+    private javax.swing.JLabel lblAccountTypeValue;
     private javax.swing.JLabel lblConfirmNewPassword;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNewPassword;

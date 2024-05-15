@@ -344,7 +344,7 @@ public class VerifyOTPDialog extends javax.swing.JDialog {
                 student.setStudId(parsedEmail.localPart());
                 String insertedStudentId = StudentDao.getStudent(StudentDao.insertStudent(student)).getStudId();
                 
-                UserDao.insertUser(insertedStudentId, email, password);
+                UserDao.insertUser(insertedStudentId, email, Helper.hashPassword(password));
             } catch (SQLException ex) {
                 Logger.getLogger(VerifyOTPDialog.class.getName()).log(Level.SEVERE, null, ex);
                 

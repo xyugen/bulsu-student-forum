@@ -134,8 +134,9 @@ public class Profile extends javax.swing.JPanel {
         lblStudentId.setLabelFor(txtStudentId);
         lblStudentId.setText("Student ID");
 
-        txtStudentId.setBackground(new java.awt.Color(60, 63, 65));
+        txtStudentId.setBackground(new java.awt.Color(204, 204, 204));
         txtStudentId.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtStudentId.setForeground(new java.awt.Color(0, 0, 0));
         txtStudentId.setEnabled(false);
 
         lblLastName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -143,28 +144,36 @@ public class Profile extends javax.swing.JPanel {
         lblLastName.setLabelFor(txtLastName);
         lblLastName.setText("Last Name");
 
+        txtLastName.setBackground(new java.awt.Color(255, 255, 255));
         txtLastName.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtLastName.setForeground(new java.awt.Color(0, 0, 0));
 
         lblFirstName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
         lblFirstName.setLabelFor(txtFirstName);
         lblFirstName.setText("First Name");
 
+        txtFirstName.setBackground(new java.awt.Color(255, 255, 255));
         txtFirstName.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtFirstName.setForeground(new java.awt.Color(0, 0, 0));
 
         lblMiddleName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblMiddleName.setForeground(new java.awt.Color(255, 255, 255));
         lblMiddleName.setLabelFor(txtFirstName);
         lblMiddleName.setText("Middle Name");
 
+        txtMiddleName.setBackground(new java.awt.Color(255, 255, 255));
         txtMiddleName.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
+        txtMiddleName.setForeground(new java.awt.Color(0, 0, 0));
 
         lblYear.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblYear.setForeground(new java.awt.Color(255, 255, 255));
         lblYear.setLabelFor(txtFirstName);
         lblYear.setText("Year");
 
+        cmbYear.setBackground(new java.awt.Color(255, 255, 255));
         cmbYear.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        cmbYear.setForeground(new java.awt.Color(0, 0, 0));
         cmbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         lblCourse.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -172,13 +181,17 @@ public class Profile extends javax.swing.JPanel {
         lblCourse.setLabelFor(txtFirstName);
         lblCourse.setText("Course");
 
+        cmbCourse.setBackground(new java.awt.Color(255, 255, 255));
         cmbCourse.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        cmbCourse.setForeground(new java.awt.Color(0, 0, 0));
 
         pnlProfileContainer.setBackground(new java.awt.Color(255, 255, 255));
         pnlProfileContainer.setLayout(new java.awt.BorderLayout());
         pnlProfileContainer.add(lblProfilePicture, java.awt.BorderLayout.CENTER);
 
+        btnUpload.setBackground(new java.awt.Color(255, 255, 255));
         btnUpload.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnUpload.setForeground(new java.awt.Color(0, 0, 0));
         btnUpload.setText("Upload");
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +199,9 @@ public class Profile extends javax.swing.JPanel {
             }
         });
 
+        btnSave.setBackground(new java.awt.Color(255, 255, 255));
         btnSave.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(0, 0, 0));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

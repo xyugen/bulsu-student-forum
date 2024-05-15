@@ -212,7 +212,7 @@ public class UserDao {
         user.setId(rs.getInt("id"));
         user.setEmail(rs.getString("email"));
         user.setUsername(rs.getString("username"));
-        user.setIsAdmin(rs.getBoolean("is_admin"));
+        user.setAdmin(rs.getBoolean("is_admin"));
         user.setCreationDate(rs.getTimestamp("creation_time"));
         
         Student student = StudentDao.getStudent(rs.getInt("stud_id"));

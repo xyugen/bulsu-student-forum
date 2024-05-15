@@ -15,14 +15,14 @@ public class User {
     private String email;
     private String username;
     private Student student;
-    private boolean isAdmin;
+    private boolean admin;
     private Timestamp creationDate;
 
     public User(int id, String email, String username, Student student, boolean isAdmin, Timestamp creationDate) {
         this.id = id;
         this.email = email;
         this.student = student;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
         this.creationDate = creationDate;
     }
 
@@ -60,12 +60,12 @@ public class User {
         this.student = student;
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(boolean isAdmin) {
+        this.admin = isAdmin;
     }
 
     public Timestamp getCreationDate() {

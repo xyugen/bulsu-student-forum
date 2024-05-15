@@ -18,6 +18,8 @@ public class MenuItem extends javax.swing.JButton {
     public MenuItem() {
         this.setBackground(new java.awt.Color(242, 231, 213));
         this.setContentAreaFilled(false);
+        this.setBorderPainted(false);
+        this.setMargin(null);
         
         javax.swing.JButton component = this;
         addMouseListener(new MouseAdapter() {

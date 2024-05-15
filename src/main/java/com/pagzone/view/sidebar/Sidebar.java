@@ -5,6 +5,7 @@
 package com.pagzone.view.sidebar;
 
 import com.pagzone.main.Main;
+import com.pagzone.model.User;
 import com.pagzone.props.ChangePageListener;
 import com.pagzone.service.SessionManager;
 import java.awt.Window;
@@ -19,11 +20,29 @@ import net.miginfocom.swing.MigLayout;
 public class Sidebar extends javax.swing.JPanel {
     private MenuItem activeButton;
     private ChangePageListener listener;
+    private User currentUser;
     
+    private MenuItem btnStudents;
+            
     public Sidebar(ChangePageListener listener) {
         initComponents();
         this.listener = listener;
-        this.setLayout(new MigLayout("wrap 1", "", "[][][][][grow][]"));
+        
+        SessionManager sessionManager = SessionManager.getInstance();
+        currentUser = sessionManager.getCurrentUser();
+        
+        if (currentUser.isAdmin()) {
+            btnStudents = new MenuItem();
+            btnStudents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file_cog_red_28.png")));
+            btnStudents.setSize(60, 50);
+            btnStudents.setName("data");
+            btnStudents.addActionListener(e -> {
+                btnActionPerformed(e);
+            });
+            add(btnStudents, "cell 0 1");
+            add(btnLogout);
+        }
+        this.setLayout(new MigLayout("filly, wrap 1", "", "[][][][][grow][]"));
         
         applyActive(btnFeed);
     }
@@ -46,7 +65,6 @@ public class Sidebar extends javax.swing.JPanel {
 
         btnFeed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chat_quote_icon_red_28.png"))); // NOI18N
         btnFeed.setToolTipText("Feed");
-        btnFeed.setBorderPainted(false);
         btnFeed.setMargin(null);
         btnFeed.setName("feed"); // NOI18N
         btnFeed.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +77,6 @@ public class Sidebar extends javax.swing.JPanel {
 
         btnWrite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pencil_icon_red_28.png"))); // NOI18N
         btnWrite.setToolTipText("Create post");
-        btnWrite.setBorderPainted(false);
         btnWrite.setMargin(null);
         btnWrite.setName("write"); // NOI18N
         btnWrite.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +89,6 @@ public class Sidebar extends javax.swing.JPanel {
 
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_icon_red_28.png"))); // NOI18N
         btnUser.setToolTipText("Student profile");
-        btnUser.setBorderPainted(false);
         btnUser.setMargin(null);
         btnUser.setName("profile"); // NOI18N
         btnUser.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +101,6 @@ public class Sidebar extends javax.swing.JPanel {
 
         btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bolt_icon_red_28.png"))); // NOI18N
         btnSettings.setToolTipText("User settings");
-        btnSettings.setBorderPainted(false);
         btnSettings.setMargin(null);
         btnSettings.setName("settings"); // NOI18N
         btnSettings.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +115,6 @@ public class Sidebar extends javax.swing.JPanel {
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon_red_28.png"))); // NOI18N
         btnLogout.setToolTipText("Log out");
-        btnLogout.setBorderPainted(false);
         btnLogout.setMargin(null);
         btnLogout.setName("logout"); // NOI18N
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +123,7 @@ public class Sidebar extends javax.swing.JPanel {
             }
         });
         add(btnLogout);
-        btnLogout.setBounds(0, 220, 60, 50);
+        btnLogout.setBounds(0, 350, 60, 50);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed

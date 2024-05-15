@@ -39,7 +39,7 @@ public class Settings extends javax.swing.JPanel {
         txtEmail.setText(currentUser.getEmail());
         txtUsername.setText(currentUser.getUsername());
         
-        lblAccountTypeValue.setText(currentUser.isIsAdmin() ? "Administrator" : "Regular");
+        lblAccountTypeValue.setText(currentUser.isAdmin() ? "Administrator" : "Regular");
     }
     
     /**

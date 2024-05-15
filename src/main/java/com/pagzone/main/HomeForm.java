@@ -10,6 +10,7 @@ import com.pagzone.view.page.Feed;
 import com.pagzone.view.page.Profile;
 import com.pagzone.view.page.Settings;
 import com.pagzone.view.page.Write;
+import com.pagzone.view.page.data.DataSettings;
 import com.pagzone.view.sidebar.Sidebar;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -38,6 +39,7 @@ public class HomeForm extends javax.swing.JFrame implements ChangePageListener {
     private Write pnlWrite;
     private Profile pnlProfile;
     private Settings pnlSettings;
+    private DataSettings pnlDataSettings;
     
     public HomeForm(boolean startAnimation) {
         initComponents();
@@ -115,11 +117,13 @@ public class HomeForm extends javax.swing.JFrame implements ChangePageListener {
         pnlWrite = new Write();
         pnlProfile = new Profile();
         pnlSettings = new Settings();
+        pnlDataSettings = new DataSettings();
         
         pnlContent.add(pnlFeed, "feed");
         pnlContent.add(pnlWrite, "write");
         pnlContent.add(pnlProfile, "profile");
         pnlContent.add(pnlSettings, "settings");
+        pnlContent.add(pnlDataSettings, "data");
     }
     
     private void initAnimation() {

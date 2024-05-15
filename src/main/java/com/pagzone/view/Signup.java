@@ -14,14 +14,9 @@ import com.pagzone.util.OTPHelper;
 import com.pagzone.util.UserValidator;
 import java.awt.Color;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 /**
@@ -228,7 +223,7 @@ public class Signup extends javax.swing.JPanel {
         String email = txtEmail.getText().trim();
         String password = new String(ptxtPassword.getPassword()).trim();
         String confirmPassword = new String(ptxtConfirmPassword.getPassword()).trim();
-            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (UserValidator.verifySignup(email, password, confirmPassword)) {
             Helper.setTextFieldBorder(txtEmail, "E-mail", new Color(153,153,153));
             Helper.setTextFieldBorder(ptxtPassword, "Password", new Color(153,153,153));

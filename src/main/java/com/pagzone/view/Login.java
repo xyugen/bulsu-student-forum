@@ -218,7 +218,7 @@ public class Login extends javax.swing.JPanel {
             HomeForm homeForm = new HomeForm(false);
             homeForm.setVisible(true);
             
-            if (UserDao.verifyCredentials(username, password)){
+            if (UserDao.verifyCredentials(username, Helper.hashPassword(password))){
                 User loginUser = UserDao.getUserByEmailOrUsername(username);
                 if (loginUser != null) {
                     if (loginUser.getUsername().isEmpty() || loginUser.getUsername() == null) {

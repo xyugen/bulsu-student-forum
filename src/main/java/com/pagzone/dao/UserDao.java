@@ -71,6 +71,43 @@ public class UserDao {
         return false; // Error occurred or user not updated
     }
     
+    public static boolean updatePassword(int id, String password) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, password);
+            stmt.setInt(2, id);
+            
+            int rowsAffected = stmt.executeUpdate();
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    public static boolean updateUser(int id, String username, String password) {
+        String sql = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+        
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setInt(3, id);
+            
+            int rowsAffected = stmt.executeUpdate();
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
     public static User getUserById(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         
@@ -149,14 +186,13 @@ public class UserDao {
     }
     
     public static boolean verifyCredentials(String username, String password) {
-        String hashedPassword = Helper.hashPassword(password);
         String sql = "SELECT * FROM users WHERE (email = ? OR username = ?) AND password = ?";
         
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             stmt.setString(2, username);
-            stmt.setString(3, hashedPassword);
+            stmt.setString(3, password);
             
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {

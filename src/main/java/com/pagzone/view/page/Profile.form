@@ -113,7 +113,7 @@
                           <Component id="btnUpload" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -146,8 +146,11 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtStudentId">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="41" green="3f" red="3c" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="12" style="0"/>
+              <Font name="Yu Gothic UI" size="12" style="0"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -169,7 +172,7 @@
         <Component class="javax.swing.JTextField" name="txtLastName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="12" style="0"/>
+              <Font name="Yu Gothic UI" size="12" style="0"/>
             </Property>
           </Properties>
         </Component>
@@ -190,7 +193,7 @@
         <Component class="javax.swing.JTextField" name="txtFirstName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="12" style="0"/>
+              <Font name="Yu Gothic UI" size="12" style="0"/>
             </Property>
           </Properties>
         </Component>
@@ -211,7 +214,7 @@
         <Component class="javax.swing.JTextField" name="txtMiddleName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Poppins" size="12" style="0"/>
+              <Font name="Yu Gothic UI" size="12" style="0"/>
             </Property>
           </Properties>
         </Component>

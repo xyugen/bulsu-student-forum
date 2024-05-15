@@ -134,7 +134,8 @@ public class Profile extends javax.swing.JPanel {
         lblStudentId.setLabelFor(txtStudentId);
         lblStudentId.setText("Student ID");
 
-        txtStudentId.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtStudentId.setBackground(new java.awt.Color(60, 63, 65));
+        txtStudentId.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         txtStudentId.setEnabled(false);
 
         lblLastName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -142,21 +143,21 @@ public class Profile extends javax.swing.JPanel {
         lblLastName.setLabelFor(txtLastName);
         lblLastName.setText("Last Name");
 
-        txtLastName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtLastName.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
 
         lblFirstName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
         lblFirstName.setLabelFor(txtFirstName);
         lblFirstName.setText("First Name");
 
-        txtFirstName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtFirstName.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
 
         lblMiddleName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblMiddleName.setForeground(new java.awt.Color(255, 255, 255));
         lblMiddleName.setLabelFor(txtFirstName);
         lblMiddleName.setText("Middle Name");
 
-        txtMiddleName.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        txtMiddleName.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
 
         lblYear.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lblYear.setForeground(new java.awt.Color(255, 255, 255));
@@ -264,7 +265,7 @@ public class Profile extends javax.swing.JPanel {
                         .addComponent(pnlProfileContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpload)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         add(pnlProfile, java.awt.BorderLayout.CENTER);

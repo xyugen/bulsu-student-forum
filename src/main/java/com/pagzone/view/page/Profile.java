@@ -71,7 +71,6 @@ public class Profile extends javax.swing.JPanel {
         cmbCourse.setSelectedItem(currentStudent.getCourse() == null ? cmbCourse.getItemAt(0) : currentStudent.getCourse());
         
         if (currentStudent.getProfilePicture() != null) {
-            System.out.println("TEST1");
             try {
                 Image profilePic = Helper.convertToImage(currentStudent.getProfilePicture());
                 ImageIcon profileIcon = resizeImage(profilePic, 100, 100);
@@ -80,7 +79,6 @@ public class Profile extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
         } else {
-            System.out.println("TEST2");
             Image profilePic = ImageIO.read(getClass().getResource("/avatar_placeholder.png"));
             ImageIcon profileIcon = resizeImage(profilePic, 100, 100);
             lblProfilePicture.setIcon(profileIcon);
@@ -291,7 +289,8 @@ public class Profile extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUploadActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
+        //String stud_id
+        String firstName = txtFirstName.getText();
     }//GEN-LAST:event_btnSaveActionPerformed
 
 

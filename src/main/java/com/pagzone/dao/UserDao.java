@@ -19,20 +19,20 @@ import java.sql.Statement;
  */
 public class UserDao {
     public static int insertUser(String email, String password) throws SQLException{
-        return insertUser(-1, email, password, "");
+        return insertUser("", email, password, "");
     }
     
-    public static int insertUser(int studId, String email, String password) throws SQLException {
+    public static int insertUser(String studId, String email, String password) throws SQLException {
         return insertUser(studId, email, password, "");
     }
     
-    public static int insertUser(int studId, String email, String password, String username) throws SQLException {
+    public static int insertUser(String studId, String email, String password, String username) throws SQLException {
         String hashedPassword = Helper.hashPassword(password);
         String sql = "INSERT INTO users (stud_id, email, password, username) VALUES (?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, studId);
+            stmt.setString(1, studId);
             stmt.setString(2, email);
             stmt.setString(3, hashedPassword);
             stmt.setString(4, username);

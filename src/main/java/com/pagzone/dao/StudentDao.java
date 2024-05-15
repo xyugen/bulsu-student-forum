@@ -11,7 +11,7 @@ public class StudentDao {
         String sql = "INSERT INTO students (stud_id, first_name, middle_name, last_name, year, course, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
               PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, student.getStudId());
+            stmt.setString(1, student.getStudId());
             stmt.setString(2, student.getFirstName());
             stmt.setString(3, student.getMiddleName());
             stmt.setString(4, student.getLastName());
@@ -44,7 +44,7 @@ public class StudentDao {
             if (rs.next()) {
                 Student student = new Student();
                 student.setId(rs.getInt("id"));
-                student.setStudId(rs.getInt("stud_id"));
+                student.setStudId(rs.getString("stud_id"));
                 student.setFirstName(rs.getString("first_name"));
                 student.setMiddleName(rs.getString("middle_name"));
                 student.setLastName(rs.getString("last_name"));
@@ -70,7 +70,7 @@ public class StudentDao {
             stmt.setString(5, student.getCourse());
             stmt.setBytes(6, student.getProfilePicture());
             stmt.setInt(7, student.getId());
-            stmt.setInt(8, student.getStudId());
+            stmt.setString(8, student.getStudId());
             stmt.executeUpdate();
         }
     }
@@ -96,7 +96,7 @@ public class StudentDao {
             while (rs.next()) {
                 Student student = new Student();
                 student.setId(rs.getInt("id"));
-                student.setStudId(rs.getInt("stud_id"));
+                student.setStudId(rs.getString("stud_id"));
                 student.setFirstName(rs.getString("first_name"));
                 student.setMiddleName(rs.getString("middle_name"));
                 student.setLastName(rs.getString("last_name"));

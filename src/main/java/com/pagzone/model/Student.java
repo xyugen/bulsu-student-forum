@@ -10,7 +10,7 @@ package com.pagzone.model;
  */
 public class Student {
     private int id;
-    private int studId;
+    private String studId;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -18,7 +18,7 @@ public class Student {
     private String course;
     private byte[] profilePicture;
 
-    public Student(int id, int studId, String firstName, String middleName, String lastName, int year, String course, byte[] profilePicture) {
+    public Student(int id, String studId, String firstName, String middleName, String lastName, int year, String course, byte[] profilePicture) {
         this.id = id;
         this.studId = studId;
         this.firstName = firstName;
@@ -53,11 +53,11 @@ public class Student {
         this.middleName = middleName;
     }
 
-    public int getStudId() {
+    public String getStudId() {
         return studId;
     }
 
-    public void setStudId(int studId) {
+    public void setStudId(String studId) {
         this.studId = studId;
     }
 

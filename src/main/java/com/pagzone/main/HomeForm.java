@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.pagzone.props.ChangePageListener;
 import com.pagzone.view.page.Feed;
 import com.pagzone.view.page.Profile;
+import com.pagzone.view.page.Settings;
 import com.pagzone.view.page.Write;
 import com.pagzone.view.sidebar.Sidebar;
 import java.awt.BorderLayout;
@@ -33,9 +34,10 @@ public class HomeForm extends javax.swing.JFrame implements ChangePageListener {
     Sidebar pnlSidebar;
     javax.swing.JPanel pnlContent;
     
-    Feed pnlFeed;
-    Write pnlWrite;
-    Profile pnlProfile;
+    private Feed pnlFeed;
+    private Write pnlWrite;
+    private Profile pnlProfile;
+    private Settings pnlSettings;
     
     public HomeForm(boolean startAnimation) {
         initComponents();
@@ -112,10 +114,12 @@ public class HomeForm extends javax.swing.JFrame implements ChangePageListener {
         pnlFeed = new Feed();
         pnlWrite = new Write();
         pnlProfile = new Profile();
+        pnlSettings = new Settings();
         
         pnlContent.add(pnlFeed, "feed");
         pnlContent.add(pnlWrite, "write");
         pnlContent.add(pnlProfile, "profile");
+        pnlContent.add(pnlSettings, "settings");
     }
     
     private void initAnimation() {

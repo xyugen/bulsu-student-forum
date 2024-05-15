@@ -9,12 +9,19 @@ package com.pagzone.view.page.data;
  * @author Arias
  */
 public class DataSettings extends javax.swing.JPanel {
-
+    private PostsData postsData;
     /**
      * Creates new form DataSettings
      */
     public DataSettings() {
         initComponents();
+        init();
+    }
+    
+    private void init() {
+        postsData = new PostsData();
+        
+        tpnlDataSettings.add(postsData, "Posts");
     }
 
     /**
@@ -26,19 +33,20 @@ public class DataSettings extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        tpnlDataSettings = new javax.swing.JTabbedPane();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(0, 0, 0));
+        setLayout(new java.awt.BorderLayout());
+
+        tpnlDataSettings.setBackground(new java.awt.Color(255, 255, 255));
+        tpnlDataSettings.setForeground(new java.awt.Color(0, 0, 0));
+        tpnlDataSettings.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        add(tpnlDataSettings, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane tpnlDataSettings;
     // End of variables declaration//GEN-END:variables
 }

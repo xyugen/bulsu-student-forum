@@ -6,12 +6,13 @@ package com.pagzone.dao;
 
 import com.pagzone.model.Student;
 import com.pagzone.model.User;
-import com.pagzone.util.Helper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -107,6 +108,30 @@ public class UserDao {
         return false;
     }
     
+    public static List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        StudentDao.getStudent(rs.getString("stud_id")),
+                        rs.getBoolean("is_admin"),
+                        rs.getTimestamp("creation_time"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception
+        }
+        return users;
+    }
+        
     public static User getUserById(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         
@@ -215,7 +240,7 @@ public class UserDao {
         user.setAdmin(rs.getBoolean("is_admin"));
         user.setCreationDate(rs.getTimestamp("creation_time"));
         
-        Student student = StudentDao.getStudent(rs.getInt("stud_id"));
+        Student student = StudentDao.getStudent(rs.getString("stud_id"));
         user.setStudent(student);
         
         return user;

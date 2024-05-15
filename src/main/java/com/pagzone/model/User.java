@@ -21,6 +21,7 @@ public class User {
     public User(int id, String email, String username, Student student, boolean isAdmin, Timestamp creationDate) {
         this.id = id;
         this.email = email;
+        this.username = username;
         this.student = student;
         this.admin = isAdmin;
         this.creationDate = creationDate;

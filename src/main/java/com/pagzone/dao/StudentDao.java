@@ -35,11 +35,15 @@ public class StudentDao {
     }
     
     public static Student getStudent(int studId) throws SQLException {
+        return getStudent(String.valueOf(studId));
+    }
+    
+    public static Student getStudent(String studId) throws SQLException {
         String sql = "SELECT * FROM students WHERE id = ? OR stud_id = ?";
         try (Connection conn = DatabaseConnection.getDataSource().getConnection();
               PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, studId);
-            stmt.setInt(2, studId);
+            stmt.setInt(1, Integer.parseInt(studId));
+            stmt.setString(2, studId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Student student = new Student();

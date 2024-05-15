@@ -93,6 +93,11 @@ public class Login extends javax.swing.JPanel {
 
         ptxtPassword.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         ptxtPassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 0, 12), new java.awt.Color(153, 153, 153))); // NOI18N
+        ptxtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(199, 36, 36));
         btnLogin.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N

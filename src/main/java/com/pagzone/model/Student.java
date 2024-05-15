@@ -18,13 +18,25 @@ public class Student {
     private String course;
     private byte[] profilePicture;
 
+    public Student(String studId, String firstName, String middleName, String lastName, int year, String course, byte[] profilePicture) {
+        this.studId = studId;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.year = year;
+        this.course = course;
+        this.profilePicture = profilePicture;
+    }
+
     public Student(int id, String studId, String firstName, String middleName, String lastName, int year, String course, byte[] profilePicture) {
         this.id = id;
         this.studId = studId;
+        this.middleName = middleName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.year = year;
         this.course = course;
+        this.profilePicture = profilePicture;
     }
 
     public Student() { }

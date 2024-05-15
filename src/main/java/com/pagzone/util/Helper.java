@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
@@ -89,5 +90,29 @@ public class Helper {
     public static BufferedImage convertToImage(byte[] imgBytes) throws IOException {
         InputStream in = new ByteArrayInputStream(imgBytes);
         return ImageIO.read(in);
+    }
+    
+    public static BufferedImage convertToBufferedImage(ImageIcon icon) {
+        Image img = icon.getImage();
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        bufferedImage.getGraphics().drawImage(img, 0, 0, null);
+        return bufferedImage;
+    }
+    
+    public static byte[] convertToByteArray(BufferedImage bufferedImage, String format) throws IOException {
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, format, baos);
+        } finally {
+            baos.close();
+        }
+        
+        return baos.toByteArray();
+    }
+    
+    public static byte[] imageToByte(ImageIcon image, String format) throws IOException {
+        BufferedImage bufferedImage = convertToBufferedImage(image);
+        return convertToByteArray(bufferedImage, format);
     }
 }

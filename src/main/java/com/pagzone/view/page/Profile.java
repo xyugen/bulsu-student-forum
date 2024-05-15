@@ -5,6 +5,7 @@
 package com.pagzone.view.page;
 
 import com.pagzone.dao.CourseDao;
+import com.pagzone.dao.StudentDao;
 import com.pagzone.model.Course;
 import com.pagzone.model.Student;
 import com.pagzone.model.User;
@@ -16,10 +17,15 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -32,7 +38,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Arias
  */
 public class Profile extends javax.swing.JPanel {
-    SessionManager sessionManager;
+    private SessionManager sessionManager;
+    private Student currentStudent;
     
     /**
      * Creates new form Profile
@@ -61,16 +68,17 @@ public class Profile extends javax.swing.JPanel {
     private void populateStudentData() throws IOException {
         sessionManager = SessionManager.getInstance();
         User currentUser = sessionManager.getCurrentUser();
-        Student currentStudent = currentUser.getStudent();
+        currentStudent = currentUser.getStudent();
         
         txtStudentId.setText(String.valueOf(currentStudent.getStudId()));
         txtFirstName.setText(currentStudent.getFirstName() == null ? "" : currentStudent.getFirstName());
         txtMiddleName.setText(currentStudent.getMiddleName()== null ? "" : currentStudent.getMiddleName());
         txtLastName.setText(currentStudent.getLastName() == null ? "" : currentStudent.getLastName());
-        cmbYear.setSelectedItem(currentStudent.getYear());
+        cmbYear.setSelectedItem(String.valueOf(currentStudent.getYear()));
         cmbCourse.setSelectedItem(currentStudent.getCourse() == null ? cmbCourse.getItemAt(0) : currentStudent.getCourse());
         
-        if (currentStudent.getProfilePicture() != null) {
+        if (currentStudent.getProfilePicture() != null &&
+                currentStudent.getProfilePicture().length > 0) {
             try {
                 Image profilePic = Helper.convertToImage(currentStudent.getProfilePicture());
                 ImageIcon profileIcon = resizeImage(profilePic, 100, 100);
@@ -289,10 +297,32 @@ public class Profile extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUploadActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        //String stud_id
-        String firstName = txtFirstName.getText();
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        int id = currentStudent.getId();
+        String studId = txtStudentId.getText().trim();
+        String firstName = txtFirstName.getText().trim();
+        String middleName = txtMiddleName.getText().trim();
+        String lastName = txtLastName.getText().trim();
+        int year = Integer.parseInt(cmbYear.getSelectedItem().toString());
+        String course = (String) cmbCourse.getSelectedItem();
+        
+        byte[] profilePicture = null;
+        try {
+            BufferedImage bufferedProfilePicture = Helper.convertToBufferedImage((ImageIcon) lblProfilePicture.getIcon());
+            profilePicture = Helper.convertToByteArray(bufferedProfilePicture, "png");
+        } catch (IOException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Student student = new Student(id, studId, firstName, middleName, lastName, year, course, profilePicture);
+        try {
+            StudentDao.updateStudent(student);
+            JOptionPane.showMessageDialog(parentFrame, "Student updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(parentFrame, "Failed to update student. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;

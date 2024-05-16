@@ -209,6 +209,39 @@ public class UserDao {
         return null; // User not found
     }
     
+    public static boolean getIsAdminById(int id) throws SQLException {
+        String sql = "SELECT is_admin FROM users WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getBoolean("is_admin");
+                }
+            }
+        }
+        // If no user with the given ID is found, you might choose to throw an exception or handle it differently
+        throw new SQLException("No user found with ID: " + id);
+    }
+    
+    public static void updateIsAdminById(int id, boolean isAdmin) throws SQLException {
+        String sql = "UPDATE users SET is_admin = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setBoolean(1, isAdmin);
+            stmt.setInt(2, id);
+
+            int rowsUpdated = stmt.executeUpdate();
+
+            if (rowsUpdated == 0) {
+                throw new SQLException("No user found with ID: " + id);
+            }
+        }
+    }
+    
     public static boolean verifyCredentials(String username, String password) {
         String sql = "SELECT * FROM users WHERE (email = ? OR username = ?) AND password = ?";
         

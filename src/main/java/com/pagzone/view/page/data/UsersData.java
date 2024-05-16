@@ -6,6 +6,7 @@ package com.pagzone.view.page.data;
 
 import com.pagzone.dao.UserDao;
 import com.pagzone.model.User;
+import com.pagzone.props.DataChangeListener;
 import com.pagzone.util.Helper;
 import java.util.List;
 import javax.swing.JFrame;
@@ -20,7 +21,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Arias
  */
-public final class UsersData extends javax.swing.JPanel {
+public final class UsersData extends javax.swing.JPanel implements DataChangeListener {
     private JFrame parentFrame;
     private DefaultTableModel tableModel;
     private TableRowSorter<DefaultTableModel> rowSorter;
@@ -44,6 +45,12 @@ public final class UsersData extends javax.swing.JPanel {
         populateTableData();
         rowSorter = new TableRowSorter<>(tableModel);
         parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+    }
+    
+    @Override
+    public void refresh() {
+        tableModel.setRowCount(0);
+        populateTableData();
     }
     
     public void populateTableData() {

@@ -62,6 +62,29 @@ public class PostDao {
         return posts;
     }
     
+    public static Post getPost(int id) throws SQLException {
+        String sql = "SELECT * FROM posts WHERE id = ?";
+        
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+              PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Post post = new Post(
+                        rs.getInt("id"),
+                        UserDao.getUserById(rs.getInt("user_id")),
+                        rs.getString("title"),
+                        rs.getString("body"),
+                        rs.getTimestamp("timestamp")
+                );
+                return post;
+            } else {
+                return null;
+            }
+        }
+    }
+    
     // Update operation
     public static void updatePost(int postId, Post post) {
         String sql = "UPDATE posts SET title = ?, body = ? WHERE id = ?";

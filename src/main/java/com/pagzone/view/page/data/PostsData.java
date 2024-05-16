@@ -6,6 +6,10 @@ package com.pagzone.view.page.data;
 
 import com.pagzone.dao.PostDao;
 import com.pagzone.model.Post;
+import com.pagzone.props.DataChangeListener;
+import com.pagzone.view.page.data.dialog.EditDialog;
+import com.pagzone.view.page.data.dialog.PostEdit;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -19,7 +23,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Arias
  */
-public final class PostsData extends javax.swing.JPanel {
+public final class PostsData extends javax.swing.JPanel implements DataChangeListener {
     private JFrame parentFrame;
     private DefaultTableModel tableModel;
     private TableRowSorter<DefaultTableModel> rowSorter;
@@ -31,7 +35,7 @@ public final class PostsData extends javax.swing.JPanel {
         add(txtSearch, "growx");
         add(spnlPostTable, "span 2, grow");
         
-        String[] columnNames = {"ID", "Author ID", "Title", "Body", "Timestamp"};
+        String[] columnNames = {"ID", "Author", "Title", "Body", "Timestamp"};
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -63,6 +67,12 @@ public final class PostsData extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(parentFrame, "Error loading posts", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
+    }
+    
+    @Override
+    public void refresh() {
+        tableModel.setRowCount(0);
+        populateTableData();
     }
     
     @SuppressWarnings("unchecked")
@@ -100,6 +110,11 @@ public final class PostsData extends javax.swing.JPanel {
         tblPosts.setGridColor(new java.awt.Color(51, 51, 51));
         tblPosts.getTableHeader().setResizingAllowed(false);
         tblPosts.getTableHeader().setReorderingAllowed(false);
+        tblPosts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPostsMouseClicked(evt);
+            }
+        });
         spnlPostTable.setViewportView(tblPosts);
 
         add(spnlPostTable);
@@ -117,6 +132,20 @@ public final class PostsData extends javax.swing.JPanel {
         }
         tblPosts.setRowSorter(rowSorter);
     }//GEN-LAST:event_txtSearchKeyTyped
+
+    private void tblPostsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPostsMouseClicked
+        int selectedRow = tblPosts.getSelectedRow();
+        int selectedId = (int) tblPosts.getValueAt(selectedRow, 0);
+        
+        try {
+            PostEdit postEdit = new PostEdit(PostDao.getPost(selectedId));
+            postEdit.setListener(this);
+            EditDialog editDialog = new EditDialog(parentFrame, true, postEdit);
+            editDialog.setVisible(true);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_tblPostsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,8 +1,10 @@
 package com.pagzone.component;
 
 import java.awt.Frame;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -71,16 +73,27 @@ public class CustomTitleBar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        if (frame != null) {
-            System.exit(0);
+        Window window = SwingUtilities.getWindowAncestor(this);
+
+        if (window instanceof JFrame) {
+            ((JFrame) window).dispose(); // Close the JFrame
+            System.exit(0); // Optionally exit the application
+        } else if (window instanceof JDialog) {
+            ((JDialog) window).dispose(); // Close the JDialog
+        } else {
+            System.exit(0); // Fallback
         }
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizeActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        if (frame != null) {
-            animateMinimize(frame);
+        Window window = SwingUtilities.getWindowAncestor(this);
+
+        if (window instanceof JFrame jFrame) {
+            animateMinimize(jFrame);
+        } else if (window instanceof JDialog) {
+            btnMinimize.setVisible(false);
+        } else {
+            btnMinimize.setVisible(false);
         }
     }//GEN-LAST:event_btnMinimizeActionPerformed
 

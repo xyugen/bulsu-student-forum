@@ -110,6 +110,11 @@ public final class UsersData extends javax.swing.JPanel implements DataChangeLis
         tblUsers.setGridColor(new java.awt.Color(51, 51, 51));
         tblUsers.getTableHeader().setResizingAllowed(false);
         tblUsers.getTableHeader().setReorderingAllowed(false);
+        tblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsersMouseClicked(evt);
+            }
+        });
         spnlUserTable.setViewportView(tblUsers);
 
         add(spnlUserTable);
@@ -127,6 +132,10 @@ public final class UsersData extends javax.swing.JPanel implements DataChangeLis
         }
         tblUsers.setRowSorter(rowSorter);
     }//GEN-LAST:event_txtSearchKeyTyped
+
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        
+    }//GEN-LAST:event_tblUsersMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

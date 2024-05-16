@@ -5,12 +5,14 @@
 package com.pagzone.view.page.data;
 
 import com.pagzone.dao.StudentDao;
-import com.pagzone.dao.UserDao;
 import com.pagzone.model.Student;
-import com.pagzone.model.User;
 import com.pagzone.props.DataChangeListener;
-import com.pagzone.util.Helper;
+import com.pagzone.view.page.data.dialog.EditDialog;
+import com.pagzone.view.page.data.dialog.StudentEdit;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -112,6 +114,11 @@ public class StudentsData extends javax.swing.JPanel implements DataChangeListen
         tblStudents.setGridColor(new java.awt.Color(51, 51, 51));
         tblStudents.getTableHeader().setResizingAllowed(false);
         tblStudents.getTableHeader().setReorderingAllowed(false);
+        tblStudents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStudentsMouseClicked(evt);
+            }
+        });
         spnlStudentsTable.setViewportView(tblStudents);
 
         add(spnlStudentsTable);
@@ -129,6 +136,20 @@ public class StudentsData extends javax.swing.JPanel implements DataChangeListen
         }
         tblStudents.setRowSorter(rowSorter);
     }//GEN-LAST:event_txtSearchKeyTyped
+
+    private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentsMouseClicked
+        try {
+            int selectedRow = tblStudents.getSelectedRow();
+            int selectedId = (int) tblStudents.getValueAt(selectedRow, 0);
+            
+            StudentEdit studentEdit = new StudentEdit(StudentDao.getStudent(selectedId));
+            studentEdit.setListener(this);
+            EditDialog editDialog = new EditDialog(parentFrame, true, studentEdit);
+            editDialog.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentsData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tblStudentsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

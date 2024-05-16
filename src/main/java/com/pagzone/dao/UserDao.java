@@ -171,6 +171,25 @@ public class UserDao {
         return null; // User not found
     }
     
+    public static boolean deleteUserById(int id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                return true; // User was successfully deleted
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false; // User not found or error occurred
+    }
+    
     public static User getUserByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
         

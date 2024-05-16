@@ -5,12 +5,17 @@
 package com.pagzone.view.page.data.dialog;
 
 import com.pagzone.dao.PostDao;
+import com.pagzone.dao.StudentDao;
 import com.pagzone.dao.UserDao;
 import com.pagzone.model.Post;
 import com.pagzone.model.User;
 import com.pagzone.props.DataChangeListener;
+import com.pagzone.service.SessionManager;
 import com.pagzone.util.Helper;
 import com.pagzone.util.UserValidator;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -197,17 +202,29 @@ public final class UserEdit extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         JDialog parentFrame = (JDialog) SwingUtilities.getWindowAncestor(this);
-        int choice = JOptionPane.showConfirmDialog(parentFrame, "Are you sure you want to delete user?",
+        int choice = JOptionPane.showConfirmDialog(parentFrame,
+                """
+                    Are you sure you want to delete user?
+                    Deleting this student will delete the corresponding student.""",
                 "Delete User", JOptionPane.YES_NO_OPTION);
         
         if (choice == 0) {
-            UserDao.getUserById(user.getId());
-            if (listener != null) {
-                listener.refresh();
-            } else {
-                System.out.println("No listener");
+            try {
+                StudentDao.deleteStudent(user.getStudent().getId());
+                if (listener != null) {
+                    if (user.getId() == SessionManager
+                            .getInstance()
+                            .getCurrentUser()
+                            .getId())
+                        System.exit(0);
+                    listener.refresh();
+                } else {
+                    System.out.println("No listener");
+                }
+                parentFrame.dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserEdit.class.getName()).log(Level.SEVERE, null, ex);
             }
-            parentFrame.dispose();
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

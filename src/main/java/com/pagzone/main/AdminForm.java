@@ -20,14 +20,9 @@ import net.miginfocom.swing.MigLayout;
  * @author Arias
  */
 public class AdminForm extends javax.swing.JFrame {
-    private DataChangeListener listener;
     private Point initialClick;
     private UsersData usersData;
-    private int userId;
-    private boolean isAdmin;
     
-    private JScrollPane spnlUserTable;
-    private JTable tblUsers;
     
     public AdminForm() {
         initComponents();
@@ -37,36 +32,7 @@ public class AdminForm extends javax.swing.JFrame {
     
     private void init() {
         usersData = new UsersData();
-        listener = usersData;
         pnlAdmin.add(usersData, BorderLayout.CENTER);
-        
-        spnlUserTable = (JScrollPane) usersData.getComponent(2);
-        tblUsers = (JTable) spnlUserTable.getViewport().getView();
-        
-        tblUsers.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                tblUsersMouseClicked(e);
-            }
-        });
-    }
-    
-    private void tblUsersMouseClicked(MouseEvent evt) {
-        int selectedRow = tblUsers.getSelectedRow();
-        
-        if (selectedRow > -1) {
-            btnSave.setEnabled(true);
-            userId = (int) tblUsers.getValueAt(selectedRow, 0);
-            txtUserId.setText(String.valueOf(userId));
-        } else {
-            btnSave.setEnabled(false);
-        }
-        
-        try {
-            isAdmin = UserDao.getIsAdminById(userId);
-            cmbIsAdmin.setSelectedIndex(isAdmin ? 1 : 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
     private void applyMouseListener() {
@@ -120,13 +86,6 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         pnlHeader = new com.pagzone.view.Header();
         lblAdminPanel = new javax.swing.JLabel();
-        pnlActions = new javax.swing.JPanel();
-        lblUserId = new javax.swing.JLabel();
-        txtUserId = new javax.swing.JTextField();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        lblIsAdmin = new javax.swing.JLabel();
-        cmbIsAdmin = new javax.swing.JComboBox<>();
-        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin");
@@ -151,60 +110,11 @@ public class AdminForm extends javax.swing.JFrame {
 
         pnlAdmin.add(jPanel1, java.awt.BorderLayout.NORTH);
 
-        pnlActions.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblUserId.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        lblUserId.setForeground(new java.awt.Color(0, 0, 0));
-        lblUserId.setText("User ID");
-        pnlActions.add(lblUserId);
-
-        txtUserId.setEditable(false);
-        txtUserId.setBackground(new java.awt.Color(204, 204, 204));
-        txtUserId.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txtUserId.setForeground(new java.awt.Color(51, 51, 51));
-        pnlActions.add(txtUserId);
-        pnlActions.add(filler1);
-
-        lblIsAdmin.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        lblIsAdmin.setForeground(new java.awt.Color(0, 0, 0));
-        lblIsAdmin.setText("Is Admin");
-        pnlActions.add(lblIsAdmin);
-
-        cmbIsAdmin.setBackground(new java.awt.Color(255, 255, 255));
-        cmbIsAdmin.setForeground(new java.awt.Color(0, 0, 0));
-        cmbIsAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
-        pnlActions.add(cmbIsAdmin);
-
-        btnSave.setBackground(new java.awt.Color(255, 255, 255));
-        btnSave.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        btnSave.setForeground(new java.awt.Color(0, 0, 0));
-        btnSave.setText("Save");
-        btnSave.setEnabled(false);
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-        pnlActions.add(btnSave);
-
-        pnlAdmin.add(pnlActions, java.awt.BorderLayout.SOUTH);
-
         getContentPane().add(pnlAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 410));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        int selectedIndex = cmbIsAdmin.getSelectedIndex();
-        boolean newIsAdmin = (selectedIndex == 1);
-        try {
-            UserDao.updateIsAdminById(userId, newIsAdmin);
-            listener.refresh();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -226,16 +136,9 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cmbIsAdmin;
-    private javax.swing.Box.Filler filler1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAdminPanel;
-    private javax.swing.JLabel lblIsAdmin;
-    private javax.swing.JLabel lblUserId;
-    private javax.swing.JPanel pnlActions;
     private javax.swing.JPanel pnlAdmin;
     private com.pagzone.view.Header pnlHeader;
-    private javax.swing.JTextField txtUserId;
     // End of variables declaration//GEN-END:variables
 }

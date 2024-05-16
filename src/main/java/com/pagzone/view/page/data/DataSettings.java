@@ -12,6 +12,7 @@ public class DataSettings extends javax.swing.JPanel {
     private PostsData postsData;
     private UsersData usersData;
     private StudentsData studentsData;
+    private CoursesData coursesData;
     
     public DataSettings() {
         initComponents();
@@ -22,10 +23,12 @@ public class DataSettings extends javax.swing.JPanel {
         postsData = new PostsData();
         usersData = new UsersData();
         studentsData = new StudentsData();
+        coursesData = new CoursesData();
         
         tpnlDataSettings.add(postsData, "Posts");
         tpnlDataSettings.add(usersData, "Users");
         tpnlDataSettings.add(studentsData, "Students");
+        tpnlDataSettings.add(coursesData, "Courses");
     }
 
     @SuppressWarnings("unchecked")

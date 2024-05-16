@@ -108,6 +108,26 @@ public class UserDao {
         return false;
     }
     
+        public static boolean updateUser(int id, User user) {
+        String sql = "UPDATE users SET username = ?, email = ?, is_admin = ? WHERE id = ?";
+        
+        try (Connection conn = DatabaseConnection.getDataSource().getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setBoolean(3, user.isAdmin());
+            stmt.setInt(4, id);
+            
+            int rowsAffected = stmt.executeUpdate();
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";

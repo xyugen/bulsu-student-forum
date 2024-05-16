@@ -8,6 +8,8 @@ import com.pagzone.dao.UserDao;
 import com.pagzone.model.User;
 import com.pagzone.props.DataChangeListener;
 import com.pagzone.util.Helper;
+import com.pagzone.view.page.data.dialog.EditDialog;
+import com.pagzone.view.page.data.dialog.UserEdit;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,9 +24,9 @@ import net.miginfocom.swing.MigLayout;
  * @author Arias
  */
 public final class UsersData extends javax.swing.JPanel implements DataChangeListener {
-    private JFrame parentFrame;
-    private DefaultTableModel tableModel;
-    private TableRowSorter<DefaultTableModel> rowSorter;
+    private final JFrame parentFrame;
+    private final DefaultTableModel tableModel;
+    private final TableRowSorter<DefaultTableModel> rowSorter;
 
     public UsersData() {
         initComponents();
@@ -134,7 +136,13 @@ public final class UsersData extends javax.swing.JPanel implements DataChangeLis
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        int selectedRow = tblUsers.getSelectedRow();
+        int selectedId = (int) tblUsers.getValueAt(selectedRow, 0);
         
+        UserEdit userEdit = new UserEdit(UserDao.getUserById(selectedId));
+        userEdit.setListener(this);
+        EditDialog editDialog = new EditDialog(parentFrame, true, userEdit);
+        editDialog.setVisible(true);
     }//GEN-LAST:event_tblUsersMouseClicked
 
 

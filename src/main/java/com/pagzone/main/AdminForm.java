@@ -135,6 +135,7 @@ public class AdminForm extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlAdmin.setBackground(new java.awt.Color(255, 255, 255));
+        pnlAdmin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(199, 36, 36), 2));
         pnlAdmin.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setOpaque(false);
@@ -191,6 +192,7 @@ public class AdminForm extends javax.swing.JFrame {
         getContentPane().add(pnlAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 410));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed

@@ -11,6 +11,7 @@ package com.pagzone.view.page.data;
 public class DataSettings extends javax.swing.JPanel {
     private PostsData postsData;
     private UsersData usersData;
+    private StudentsData studentsData;
     
     public DataSettings() {
         initComponents();
@@ -20,9 +21,11 @@ public class DataSettings extends javax.swing.JPanel {
     private void init() {
         postsData = new PostsData();
         usersData = new UsersData();
+        studentsData = new StudentsData();
         
         tpnlDataSettings.add(postsData, "Posts");
         tpnlDataSettings.add(usersData, "Users");
+        tpnlDataSettings.add(studentsData, "Students");
     }
 
     @SuppressWarnings("unchecked")

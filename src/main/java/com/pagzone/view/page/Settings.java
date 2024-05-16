@@ -52,7 +52,6 @@ public class Settings extends javax.swing.JPanel {
     private void initComponents() {
 
         lblSettings = new javax.swing.JLabel();
-        tpnlSettings = new javax.swing.JTabbedPane();
         pnlUserSettings = new javax.swing.JPanel();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -69,7 +68,6 @@ public class Settings extends javax.swing.JPanel {
         ptxtConfirmNewPassword = new javax.swing.JPasswordField();
         chkChangePassword = new javax.swing.JCheckBox();
         btnSave = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -80,10 +78,6 @@ public class Settings extends javax.swing.JPanel {
         lblSettings.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSettings.setText("Settings");
         add(lblSettings, java.awt.BorderLayout.PAGE_START);
-
-        tpnlSettings.setBackground(new java.awt.Color(255, 255, 255));
-        tpnlSettings.setForeground(new java.awt.Color(0, 0, 0));
-        tpnlSettings.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
 
         pnlUserSettings.setOpaque(false);
 
@@ -242,24 +236,7 @@ public class Settings extends javax.swing.JPanel {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        tpnlSettings.addTab("User Settings", pnlUserSettings);
-
-        jPanel2.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
-        );
-
-        tpnlSettings.addTab("tab2", jPanel2);
-
-        add(tpnlSettings, java.awt.BorderLayout.CENTER);
+        add(pnlUserSettings, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkOldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkOldPasswordActionPerformed
@@ -359,7 +336,6 @@ public class Settings extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JCheckBox chkChangePassword;
     private javax.swing.JCheckBox chkOldPassword;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAccountType;
     private javax.swing.JLabel lblAccountTypeValue;
     private javax.swing.JLabel lblConfirmNewPassword;
@@ -372,7 +348,6 @@ public class Settings extends javax.swing.JPanel {
     private javax.swing.JPasswordField ptxtConfirmNewPassword;
     private javax.swing.JPasswordField ptxtNewPassword;
     private javax.swing.JPasswordField ptxtOldPassword;
-    private javax.swing.JTabbedPane tpnlSettings;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
